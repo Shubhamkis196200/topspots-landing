@@ -211,12 +211,30 @@ export default function Navbar() {
                 ))}
 
                 <div className="pt-4 mt-4 border-t border-white/10 space-y-3">
-                  {/* Cross-link */}
+                  {/* Page links */}
                   <Link
-                    to={isVenues ? '/staff' : '/venues'}
-                    className="flex items-center gap-2 px-4 py-3 text-base font-medium text-gold hover:bg-gold/10 rounded-lg transition-all duration-200"
+                    to="/venues"
+                    className={`flex items-center gap-2 px-4 py-3 text-base font-medium rounded-lg transition-all duration-200 ${
+                      isVenues ? 'text-gold bg-gold/10' : 'text-white/70 hover:text-gold hover:bg-gold/10'
+                    }`}
                   >
-                    {isVenues ? 'For Staff →' : 'For Venues →'}
+                    For Venues →
+                  </Link>
+                  <Link
+                    to="/staff"
+                    className={`flex items-center gap-2 px-4 py-3 text-base font-medium rounded-lg transition-all duration-200 ${
+                      isStaff ? 'text-gold bg-gold/10' : 'text-white/70 hover:text-gold hover:bg-gold/10'
+                    }`}
+                  >
+                    For Staff →
+                  </Link>
+                  <Link
+                    to="/marketplace"
+                    className={`flex items-center gap-2 px-4 py-3 text-base font-medium rounded-lg transition-all duration-200 ${
+                      isMarketplace ? 'text-gold bg-gold/10' : 'text-white/70 hover:text-gold hover:bg-gold/10'
+                    }`}
+                  >
+                    Marketplace →
                   </Link>
 
                   {/* Sign In */}
