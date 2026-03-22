@@ -1,530 +1,797 @@
-import { motion } from 'framer-motion'
-import {
-  ArrowRight, CalendarCheck, QrCode, BarChart3, Users, Star, Shield,
-  Store, Clock, TrendingUp, Zap, Globe, CreditCard, ChevronDown,
-  Check, Crown, Sparkles, MapPin, Utensils,
-  Award, Smartphone, Palette, ChefHat, Building2
-} from 'lucide-react'
 import { useState } from 'react'
+import { motion } from 'framer-motion'
+import { ChevronDown, Check, X, Zap, QrCode, BarChart3, Heart, Users, Calendar, TrendingUp, Shield, Globe, Headphones, Sparkles } from 'lucide-react'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 30 },
-  visible: (i: number) => ({
-    opacity: 1, y: 0,
-    transition: { delay: i * 0.1, duration: 0.6, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }
-  })
+// Animation variants
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.2,
+    },
+  },
 }
 
-const stagger = {
-  visible: { transition: { staggerChildren: 0.08 } }
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
+  },
 }
 
-export default function VenuesLanding() {
-  const [openFaq, setOpenFaq] = useState<number | null>(null)
+// Counter component
+function Counter({ value, label }: { value: string; label: string }) {
+  const [displayValue, setDisplayValue] = useState(0)
+  const numValue = parseInt(value.replace(/[^0-9]/g, ''), 10)
 
   return (
-    <div className="min-h-screen bg-white">
-      <Navbar />
+    <motion.div
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
+      onViewportEnter={() => {
+        let current = 0
+        const increment = Math.ceil(numValue / 30)
+        const timer = setInterval(() => {
+          current += increment
+          if (current >= numValue) {
+            setDisplayValue(numValue)
+            clearInterval(timer)
+          } else {
+            setDisplayValue(current)
+          }
+        }, 20)
+      }}
+      className="text-center"
+    >
+      <div className="font-mono text-2xl md:text-3xl font-semibold text-gold mb-2">
+        {displayValue > 0 ? `${displayValue.toLocaleString()}+` : value}
+      </div>
+      <p className="text-sm md:text-base text-white/70">{label}</p>
+    </motion.div>
+  )
+}
 
-      {/* ═══════════════ HERO ═══════════════ */}
-      <section className="relative pt-28 pb-20 lg:pt-36 lg:pb-32 overflow-hidden">
-        {/* Background effects */}
-        <div className="absolute inset-0 bg-gradient-to-b from-warm-white via-white to-white" />
-        <div className="absolute top-20 right-[-10%] w-[600px] h-[600px] bg-gold/5 rounded-full blur-[100px]" />
-        <div className="absolute bottom-0 left-[-5%] w-[400px] h-[400px] bg-gold/3 rounded-full blur-[80px]" />
+// Hero Section
+function HeroSection() {
+  return (
+    <section className="relative min-h-screen pt-24 pb-16 bg-charcoal overflow-hidden">
+      <div className="absolute inset-0 bg-gold-mesh opacity-60" />
+      <motion.div
+        animate={{
+          backgroundPosition: ['0% 0%', '100% 100%', '0% 0%'],
+        }}
+        transition={{ duration: 20, repeat: Infinity }}
+        className="absolute inset-0 opacity-40"
+        style={{
+          background: 'radial-gradient(ellipse 80% 80% at 50% 50%, rgba(201, 161, 74, 0.1), transparent)',
+          backgroundSize: '200% 200%',
+        }}
+      />
+      <div className="absolute inset-0 grain opacity-30" />
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-            {/* Left — Copy */}
-            <motion.div initial="hidden" animate="visible" variants={stagger} className="space-y-8">
-              <motion.div variants={fadeUp} custom={0}
-                className="inline-flex items-center gap-2 px-4 py-2 bg-gold/10 rounded-full border border-gold/20">
-                <Sparkles className="w-4 h-4 text-gold" />
-                <span className="text-sm font-medium text-gold">Join 340+ premium venues across Poland</span>
-              </motion.div>
-
-              <motion.h1 variants={fadeUp} custom={1}
-                className="text-4xl sm:text-5xl lg:text-[3.5rem] font-extrabold leading-[1.1] tracking-tight text-gray-900">
-                Everything your venue
-                <br />
-                <span className="bg-gradient-to-r from-gold via-gold-light to-gold bg-clip-text text-transparent">
-                  needs to thrive
-                </span>
-              </motion.h1>
-
-              <motion.p variants={fadeUp} custom={2}
-                className="text-lg lg:text-xl text-gray-500 leading-relaxed max-w-lg">
-                Bookings, menus, QR codes, staff profiles, reviews, analytics, and tipping — all in one platform built for modern venues in Poland and Europe.
-              </motion.p>
-
-              {/* Value pills */}
-              <motion.div variants={fadeUp} custom={3} className="flex flex-wrap gap-3">
-                {[
-                  { icon: CalendarCheck, label: 'Smart Bookings' },
-                  { icon: QrCode, label: 'QR Menus' },
-                  { icon: BarChart3, label: 'Analytics' },
-                  { icon: CreditCard, label: 'Tipping' },
-                ].map((p) => (
-                  <div key={p.label} className="flex items-center gap-2 px-4 py-2.5 bg-white border border-gray-200 rounded-full shadow-sm">
-                    <p.icon className="w-4 h-4 text-gold" />
-                    <span className="text-sm font-medium text-gray-700">{p.label}</span>
-                  </div>
-                ))}
-              </motion.div>
-
-              {/* CTAs */}
-              <motion.div variants={fadeUp} custom={4} className="flex flex-col sm:flex-row gap-4">
-                <a href="https://topspots.global/apply"
-                  className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-gold to-gold-light text-white text-base font-semibold rounded-2xl shadow-xl shadow-gold/25 hover:shadow-gold/40 hover:scale-[1.02] transition-all">
-                  Start Free Trial <ArrowRight className="w-5 h-5" />
-                </a>
-                <a href="#how-it-works"
-                  className="inline-flex items-center justify-center px-8 py-4 border-2 border-gray-200 text-gray-700 text-base font-semibold rounded-2xl hover:border-gold hover:text-gold transition-all">
-                  See How It Works
-                </a>
-              </motion.div>
-
-              <motion.p variants={fadeUp} custom={5} className="text-sm text-gray-400">
-                30-day free trial · No credit card required · Cancel anytime
-              </motion.p>
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
+            <motion.div className="inline-flex items-center gap-2 px-4 py-2 bg-gold-glow rounded-full border border-gold/30 mb-8" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }}>
+              <span className="w-2 h-2 bg-gold rounded-full animate-pulse" />
+              <span className="text-sm font-medium text-gold">The #1 Venue Platform in Poland</span>
             </motion.div>
 
-            {/* Right — Dashboard Preview */}
-            <motion.div initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.3, duration: 0.8 }}
-              className="relative hidden lg:block">
-              <div className="rounded-3xl border border-gray-200 bg-white shadow-2xl shadow-gray-200/50 overflow-hidden">
-                {/* Browser chrome */}
-                <div className="flex items-center gap-2 px-5 py-3.5 bg-gray-50 border-b border-gray-100">
-                  <div className="w-3 h-3 rounded-full bg-red-400" />
-                  <div className="w-3 h-3 rounded-full bg-amber-400" />
-                  <div className="w-3 h-3 rounded-full bg-emerald-400" />
-                  <div className="flex-1 mx-6 h-7 rounded-lg bg-gray-100 flex items-center px-3">
-                    <span className="text-[11px] text-gray-400">topspots.global/dashboard</span>
-                  </div>
+            <motion.h1
+              className="text-5xl md:text-7xl font-['Instrument_Serif'] font-bold text-white mb-6 leading-tight"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.8 }}
+            >
+              Everything your venue needs to <span className="text-gradient-gold">thrive</span>
+            </motion.h1>
+
+            <motion.p
+              className="text-lg md:text-xl text-white/80 mb-8 leading-relaxed max-w-md"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4, duration: 0.8 }}
+            >
+              Bookings, menus, QR codes, staff profiles, reviews, analytics, and tipping — all in one platform built for modern venues in Poland and Europe.
+            </motion.p>
+
+            <motion.div
+              className="flex flex-wrap gap-3 mb-8"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.8 }}
+            >
+              {['Smart Bookings', 'QR Menus', 'Analytics', 'Tipping'].map((pill, i) => (
+                <div key={i} className="px-4 py-2 bg-white/10 border border-white/20 rounded-full text-sm font-medium text-white/90 backdrop-blur-sm hover:bg-white/15 transition-colors">
+                  {pill}
                 </div>
-                {/* Dashboard content */}
-                <div className="p-6 space-y-5">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <p className="text-xs text-gray-400">Welcome back</p>
-                      <p className="text-lg font-bold text-gray-900">Cafe Milano</p>
-                    </div>
-                    <span className="px-3 py-1 bg-emerald-50 text-emerald-600 text-xs font-medium rounded-full">Live</span>
-                  </div>
-                  {/* Stats */}
-                  <div className="grid grid-cols-3 gap-3">
-                    {[
-                      { label: 'Bookings Today', value: '18', change: '+23%', color: 'text-emerald-600' },
-                      { label: 'Profile Views', value: '342', change: '+12%', color: 'text-blue-600' },
-                      { label: 'Avg Rating', value: '4.8★', change: '+0.2', color: 'text-amber-600' },
-                    ].map((s) => (
-                      <div key={s.label} className="p-3 rounded-xl bg-gray-50 border border-gray-100">
-                        <p className="text-xl font-bold text-gray-900">{s.value}</p>
-                        <p className="text-[11px] text-gray-400 mt-0.5">{s.label}</p>
-                        <p className={`text-[11px] font-medium ${s.color} mt-1`}>{s.change}</p>
-                      </div>
-                    ))}
-                  </div>
-                  {/* Chart */}
-                  <div className="h-28 rounded-xl bg-gradient-to-t from-gold/5 to-transparent border border-gray-100 flex items-end p-3 gap-1.5">
-                    {[35, 55, 45, 70, 60, 85, 75, 90, 65, 80, 70, 95].map((h, i) => (
-                      <div key={i} className="flex-1 rounded-t bg-gradient-to-t from-gold to-gold-light opacity-80" style={{ height: `${h}%` }} />
-                    ))}
-                  </div>
-                  {/* Bookings */}
-                  <div className="space-y-2">
-                    {[
-                      { name: 'Anna K.', time: '19:00', party: 4, status: 'confirmed' },
-                      { name: 'Marek P.', time: '20:30', party: 2, status: 'pending' },
-                    ].map((b) => (
-                      <div key={b.name} className="flex items-center justify-between p-3 rounded-lg bg-gray-50 border border-gray-100">
-                        <div className="flex items-center gap-3">
-                          <div className={`w-2 h-2 rounded-full ${b.status === 'confirmed' ? 'bg-emerald-500' : 'bg-amber-500'}`} />
-                          <span className="text-sm text-gray-700 font-medium">{b.name}</span>
-                        </div>
-                        <span className="text-xs text-gray-400">{b.time} · Party of {b.party}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-              {/* Floating decorations */}
-              <div className="absolute -top-6 -right-6 w-16 h-16 bg-gold/10 rounded-full blur-xl" />
-              <div className="absolute -bottom-6 -left-6 w-20 h-20 bg-gold/5 rounded-full blur-xl" />
+              ))}
             </motion.div>
-          </div>
-        </div>
-      </section>
 
-      {/* ═══════════════ SOCIAL PROOF BAR ═══════════════ */}
-      <section className="bg-gray-50 border-y border-gray-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {[
-              { value: '340+', label: 'Premium Venues' },
-              { value: '25,000+', label: 'Bookings Managed' },
-              { value: '4.8/5', label: 'Owner Satisfaction' },
-              { value: '8', label: 'Languages Supported' },
-            ].map((s) => (
-              <div key={s.label} className="text-center">
-                <p className="text-3xl md:text-4xl font-extrabold text-gray-900">{s.value}</p>
-                <p className="text-sm text-gray-500 mt-1">{s.label}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+            <motion.div
+              className="flex flex-col sm:flex-row gap-4 mb-8"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6, duration: 0.8 }}
+            >
+              <a
+                href="https://topspots.global/apply"
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-gold to-gold-light text-charcoal font-semibold rounded-xl shadow-xl shadow-gold/30 hover:shadow-gold/50 hover:scale-105 transition-all duration-300"
+              >
+                Start Free Trial
+                <Sparkles className="w-5 h-5" />
+              </a>
+              <button
+                onClick={() => document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' })}
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-white/30 text-white font-semibold rounded-xl hover:bg-white/5 backdrop-blur-sm transition-all duration-300"
+              >
+                See How It Works
+              </button>
+            </motion.div>
 
-      {/* ═══════════════ VENUE TYPES ═══════════════ */}
-      <section className="py-20 lg:py-28">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <span className="inline-block px-4 py-2 bg-gold/10 text-gold rounded-full text-sm font-medium mb-4">Built for Every Venue</span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900">
-              One platform, every venue type
-            </h2>
-            <p className="text-lg text-gray-500 mt-4 max-w-2xl mx-auto">
-              Whether you run a fine-dining restaurant, trendy bar, cozy cafe, or event space — TopSpots adapts to your needs.
-            </p>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {[
-              { icon: Utensils, label: 'Restaurants', desc: 'Fine dining to casual', color: 'bg-red-50 text-red-600' },
-              { icon: ChefHat, label: 'Bars & Clubs', desc: 'Cocktail bars to nightclubs', color: 'bg-purple-50 text-purple-600' },
-              { icon: Store, label: 'Cafes', desc: 'Coffee shops & bakeries', color: 'bg-amber-50 text-amber-600' },
-              { icon: Building2, label: 'Events', desc: 'Venues & event spaces', color: 'bg-blue-50 text-blue-600' },
-            ].map((t) => (
-              <motion.div key={t.label} whileHover={{ y: -4 }} className="bg-white border-2 border-gray-100 rounded-2xl p-6 text-center hover:border-gold/30 hover:shadow-lg transition-all cursor-default">
-                <div className={`w-14 h-14 ${t.color} rounded-2xl flex items-center justify-center mx-auto mb-4`}>
-                  <t.icon className="w-7 h-7" />
-                </div>
-                <h3 className="text-lg font-bold text-gray-900">{t.label}</h3>
-                <p className="text-sm text-gray-500 mt-1">{t.desc}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+            <motion.p
+              className="text-sm text-white/60"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.7 }}
+            >
+              30-day free trial · No credit card · Cancel anytime
+            </motion.p>
+          </motion.div>
 
-      {/* ═══════════════ FEATURES BENTO GRID ═══════════════ */}
-      <section id="features" className="py-20 lg:py-28 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <span className="inline-block px-4 py-2 bg-gold/10 text-gold rounded-full text-sm font-medium mb-4">Features</span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900">
-              Everything your venue needs
-            </h2>
-            <p className="text-lg text-gray-500 mt-4 max-w-2xl mx-auto">
-              Real tools that help you manage and grow — no fluff, no gimmicks.
-            </p>
-          </div>
-
-          {/* Bento Grid */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              {
-                icon: Store, title: 'Venue Profile & Menu',
-                desc: 'Rich venue page with photos, gallery, detailed menu items with variants, opening hours, and your unique story — fully customizable.',
-                tag: 'Core',
-              },
-              {
-                icon: CalendarCheck, title: 'Smart Booking System',
-                desc: 'Customers book online from your profile. Manage reservations — confirm, cancel, track party sizes, special requests, and table assignments.',
-                tag: 'Core',
-              },
-              {
-                icon: QrCode, title: 'QR Code System',
-                desc: 'Generate permanent QR codes for tables, staff, and menus. Customers scan to view menu, leave tips, write reviews — no app needed.',
-                tag: 'Core',
-              },
-              {
-                icon: Users, title: 'Staff Profiles & Scheduling',
-                desc: 'Staff profiles with photos, skills, languages. Schedule shifts, track performance, let customers discover and review your team.',
-                tag: 'Team',
-              },
-              {
-                icon: Star, title: 'Reviews & Ratings',
-                desc: 'Collect real reviews after visits. Respond to feedback, auto-moderate with trust scoring, build social proof that drives bookings.',
-                tag: 'Growth',
-              },
-              {
-                icon: BarChart3, title: 'Analytics Dashboard',
-                desc: 'Track profile views, booking trends, review scores, engagement metrics. Weekly email summaries with actionable insights.',
-                tag: 'Growth',
-              },
-              {
-                icon: CreditCard, title: 'Digital Tipping',
-                desc: 'Customers tip staff via QR code — cashless, instant. Track tip analytics, manage payouts through Stripe Connect.',
-                tag: 'Revenue',
-              },
-              {
-                icon: Globe, title: '8 Languages Built-In',
-                desc: 'English, Polish, German, French, Spanish, Dutch, Russian, Ukrainian — your venue profile auto-translates for international guests.',
-                tag: 'Reach',
-              },
-              {
-                icon: Smartphone, title: 'Social Feed',
-                desc: 'TikTok-style venue feed with photos, videos, and stories. Post updates, promote events, engage followers directly.',
-                tag: 'Engagement',
-              },
-              {
-                icon: MapPin, title: 'Google Maps Integration',
-                desc: 'Import venue data from Google Places. Show location on map, sync ratings, enable "Near Me" discovery for customers.',
-                tag: 'Discovery',
-              },
-              {
-                icon: Award, title: 'Loyalty Program',
-                desc: 'Points system with bronze/silver/gold/platinum tiers. Customers earn points from tips and visits, redeem for rewards.',
-                tag: 'Retention',
-              },
-              {
-                icon: Sparkles, title: 'Marketplace',
-                desc: 'Coming soon — connect with suppliers, service providers, and partners. One platform for everything your venue needs.',
-                tag: 'Coming Soon',
-              },
-            ].map((f, i) => (
-              <motion.div key={f.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.05, duration: 0.5 }}
-                className="group bg-white border border-gray-200 rounded-2xl p-7 hover:border-gold/30 hover:shadow-xl transition-all duration-300">
-                <div className="flex items-start justify-between mb-5">
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-gold to-gold-light flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform">
-                    <f.icon className="w-6 h-6 text-white" />
-                  </div>
-                  <span className={`px-2.5 py-1 rounded-full text-[11px] font-semibold ${
-                    f.tag === 'Coming Soon' ? 'bg-purple-50 text-purple-600' :
-                    f.tag === 'Core' ? 'bg-emerald-50 text-emerald-600' :
-                    f.tag === 'Growth' ? 'bg-blue-50 text-blue-600' :
-                    f.tag === 'Revenue' ? 'bg-amber-50 text-amber-700' :
-                    f.tag === 'Team' ? 'bg-pink-50 text-pink-600' :
-                    'bg-gray-100 text-gray-600'
-                  }`}>{f.tag}</span>
-                </div>
-                <h3 className="text-lg font-bold text-gray-900 mb-2">{f.title}</h3>
-                <p className="text-sm text-gray-500 leading-relaxed">{f.desc}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ═══════════════ HOW IT WORKS ═══════════════ */}
-      <section id="how-it-works" className="py-20 lg:py-28">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <span className="inline-block px-4 py-2 bg-emerald-50 text-emerald-700 rounded-full text-sm font-medium mb-4">Getting Started</span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900">
-              Go live in three simple steps
-            </h2>
-            <p className="text-lg text-gray-500 mt-4">From application to first booking — faster than you think</p>
-          </div>
-
-          <div className="relative grid md:grid-cols-3 gap-8">
-            {/* Connection line */}
-            <div className="hidden md:block absolute top-20 left-[16%] right-[16%] h-0.5 bg-gradient-to-r from-gold via-gold-light to-gold opacity-20" />
-
-            {[
-              { num: 1, title: 'Apply', time: '5 minutes', icon: Store, desc: 'Submit your venue details — name, type, location, photos. Quick form, takes under 5 minutes.' },
-              { num: 2, title: 'Set Up', time: '24-48 hours', icon: Palette, desc: 'Add your full menu, hours, staff profiles, and photos. Our team verifies your venue within 48 hours.' },
-              { num: 3, title: 'Go Live', time: 'Immediate', icon: Zap, desc: 'Start receiving bookings and reviews. Print your QR code, place it on tables — you\'re all set.' },
-            ].map((s, i) => (
-              <motion.div key={s.num}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.15 }}
-                className="relative">
-                <div className="absolute -top-4 -left-2 w-10 h-10 rounded-full bg-gradient-to-br from-gold to-gold-light flex items-center justify-center text-white font-bold text-sm shadow-lg border-4 border-white z-10">
-                  {s.num}
-                </div>
-                <div className="h-full bg-white border-2 border-gray-100 rounded-2xl p-7 hover:shadow-xl hover:border-gold/30 transition-all">
-                  <div className="w-12 h-12 rounded-xl bg-gold/10 flex items-center justify-center mb-5">
-                    <s.icon className="w-6 h-6 text-gold" />
-                  </div>
-                  <span className="inline-block px-3 py-1 border border-gold/20 text-gold text-xs font-medium rounded-full mb-3">{s.time}</span>
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">{s.title}</h3>
-                  <p className="text-sm text-gray-500 leading-relaxed">{s.desc}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ═══════════════ WHY TOPSPOTS ═══════════════ */}
-      <section className="py-20 lg:py-28 bg-charcoal text-white overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <span className="inline-block px-4 py-2 bg-gold/20 text-gold rounded-full text-sm font-medium mb-4">Why TopSpots</span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold">
-              Built for real venue challenges
-            </h2>
-            <p className="text-lg text-gray-400 mt-4 max-w-2xl mx-auto">Every feature solves a problem venue owners actually face</p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              { icon: QrCode, title: 'One QR, Endless Uses', desc: 'Single permanent QR on every table gives customers instant menu, staff profiles, and tipping — no app required.' },
-              { icon: CalendarCheck, title: 'Fewer No-Shows', desc: 'Online booking with confirmations. Customers commit. You manage capacity with confidence.' },
-              { icon: TrendingUp, title: 'Boost Visibility', desc: 'Get discovered by new customers. Your profile, reviews, and posts help you stand out.' },
-              { icon: Users, title: 'Know Your Team', desc: 'Staff profiles, schedules, performance tracking. See who\'s on shift and how they\'re rated.' },
-              { icon: Clock, title: 'Save Hours Weekly', desc: 'Stop juggling phone calls, paper menus, spreadsheets. Everything in one place, real time.' },
-              { icon: Shield, title: 'Enterprise Security', desc: 'Bank-level encryption for all data. SOC 2 grade security, RLS on every table, audit logging.' },
-            ].map((b, i) => (
-              <motion.div key={b.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.08 }}
-                className="flex gap-4 p-6 rounded-2xl border border-white/10 hover:border-gold/30 hover:bg-white/5 transition-all">
-                <div className="flex-shrink-0 w-11 h-11 rounded-xl bg-gold/20 flex items-center justify-center">
-                  <b.icon className="w-5 h-5 text-gold" />
-                </div>
-                <div>
-                  <h3 className="font-bold text-white mb-1">{b.title}</h3>
-                  <p className="text-sm text-gray-400 leading-relaxed">{b.desc}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ═══════════════ PRICING ═══════════════ */}
-      <section id="pricing" className="py-20 lg:py-28">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <span className="inline-block px-4 py-2 bg-blue-50 text-blue-700 rounded-full text-sm font-medium mb-4">Pricing</span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900">
-              Plans that fit your venue
-            </h2>
-            <p className="text-lg text-gray-500 mt-4">All plans include a 30-day free trial. No credit card required.</p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-6">
-            {[
-              {
-                name: 'Basic', price: 99, desc: 'Get started with essentials',
-                features: ['Venue listing & profile', 'QR code menus', 'Basic analytics', 'Up to 5 staff', 'Email support'],
-                highlighted: false,
-              },
-              {
-                name: 'Pro', price: 199, desc: 'For venues serious about growth',
-                features: ['Everything in Basic', 'Advanced analytics', 'Staff management', 'Booking system', 'Priority support', 'Social feed'],
-                highlighted: true,
-              },
-              {
-                name: 'Pro+', price: 399, desc: 'Full power for ambitious venues',
-                features: ['Everything in Pro', 'Multi-venue support', 'Custom branding', 'API access', 'Dedicated manager', 'White-label options'],
-                highlighted: false,
-              },
-            ].map((plan) => (
-              <motion.div key={plan.name}
-                whileHover={{ y: -4 }}
-                className={`relative rounded-2xl p-7 ${
-                  plan.highlighted
-                    ? 'border-2 border-gold shadow-xl shadow-gold/10 bg-white'
-                    : 'border-2 border-gray-100 bg-white hover:border-gold/30'
-                } transition-all`}>
-                {plan.highlighted && (
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1.5 bg-gradient-to-r from-gold to-gold-light rounded-full shadow-lg flex items-center gap-1.5">
-                    <Crown className="w-3.5 h-3.5 text-white" />
-                    <span className="text-white text-xs font-semibold">Most Popular</span>
-                  </div>
-                )}
-                <div className="pt-4 mb-4">
-                  <h3 className="text-xl font-bold text-gray-900">{plan.name}</h3>
-                  <p className="text-sm text-gray-500 mt-1">{plan.desc}</p>
-                </div>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.3, duration: 0.8 }}
+            className="hidden lg:block"
+          >
+            <div className="relative">
+              <div className="absolute -inset-4 bg-gradient-to-br from-gold/20 to-transparent rounded-2xl blur-3xl" />
+              <div className="glass-card-gold p-8 rounded-2xl backdrop-blur-xl relative z-10">
                 <div className="mb-6">
-                  <span className="text-4xl font-extrabold text-gray-900">{plan.price}</span>
-                  <span className="text-sm text-gray-500 ml-1">PLN/month</span>
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="text-white font-semibold text-lg">Today's Overview</h3>
+                    <div className="text-2xs px-2 py-1 bg-green-500/20 text-green-300 rounded-full">+23%</div>
+                  </div>
                 </div>
-                <a href="https://topspots.global/apply"
-                  className={`block w-full text-center py-3 rounded-xl font-semibold text-sm transition-all ${
-                    plan.highlighted
-                      ? 'bg-gradient-to-r from-gold to-gold-light text-white shadow-lg shadow-gold/25 hover:shadow-gold/40'
-                      : 'bg-gray-100 text-gray-700 hover:bg-gold hover:text-white'
-                  }`}>
-                  Start Free Trial
-                </a>
-                <div className="pt-6 mt-6 border-t border-gray-100 space-y-3">
-                  {plan.features.map((f) => (
-                    <div key={f} className="flex items-start gap-2.5">
-                      <Check className="w-4 h-4 text-gold flex-shrink-0 mt-0.5" />
-                      <span className="text-sm text-gray-500">{f}</span>
+
+                <div className="grid grid-cols-2 gap-4 mb-6">
+                  {[
+                    { value: '18', label: 'Bookings Today' },
+                    { value: '342', label: 'Profile Views', color: 'text-gold' },
+                    { value: '4.8★', label: 'Avg Rating' },
+                    { value: '+12%', label: 'Revenue' },
+                  ].map((stat, i) => (
+                    <div key={i} className="p-4 bg-white/5 rounded-lg border border-white/10">
+                      <div className={`text-2xl font-bold mb-1 ${stat.color || 'text-white'}`}>{stat.value}</div>
+                      <p className="text-xs text-white/60">{stat.label}</p>
                     </div>
                   ))}
                 </div>
-              </motion.div>
-            ))}
-          </div>
-          <p className="text-center text-sm text-gray-400 mt-8">All prices in PLN. Cancel anytime during your trial.</p>
-        </div>
-      </section>
 
-      {/* ═══════════════ FAQ ═══════════════ */}
-      <section id="faq" className="py-20 lg:py-28 bg-gray-50">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-14">
-            <span className="inline-block px-4 py-2 bg-purple-50 text-purple-700 rounded-full text-sm font-medium mb-4">FAQ</span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900">Common Questions</h2>
-          </div>
-
-          <div className="space-y-3">
-            {[
-              { q: 'How much does TopSpots cost?', a: 'Three plans: Basic (99 PLN/month), Pro (199 PLN/month), and Pro+ (399 PLN/month). All include a 30-day free trial — no credit card required. Cancel anytime.' },
-              { q: 'How long does venue verification take?', a: 'Our team reviews new venues within 24–48 hours. We check your business details and ensure everything is set. You\'ll receive an email when approved.' },
-              { q: 'How does the QR code system work?', a: 'Each venue gets a unique QR code. Customers scan to view your menu, see staff profiles, and leave reviews — no app needed. Print once, works forever.' },
-              { q: 'Can I manage multiple venues?', a: 'Yes! Pro+ plan supports multi-venue management from a single dashboard. Add staff, manage bookings, and track analytics across all locations.' },
-              { q: 'What payment methods do you accept?', a: 'We use Stripe for secure payments. Accept credit/debit cards, Apple Pay, Google Pay. For tipping, customers pay directly via the QR code.' },
-              { q: 'Is there an app for customers?', a: 'TopSpots is a Progressive Web App — customers use it in their browser, no download needed. Works on any device with a modern browser.' },
-            ].map((faq, i) => (
-              <div key={i} className="border-2 border-gray-200 rounded-xl bg-white overflow-hidden hover:border-gold/30 transition-colors">
-                <button onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                  className="w-full flex items-center justify-between p-5 text-left">
-                  <span className="text-base font-semibold text-gray-900 pr-4">{faq.q}</span>
-                  <ChevronDown className={`w-5 h-5 text-gray-400 flex-shrink-0 transition-transform ${openFaq === i ? 'rotate-180' : ''}`} />
-                </button>
-                {openFaq === i && (
-                  <div className="px-5 pb-5">
-                    <p className="text-sm text-gray-500 leading-relaxed">{faq.a}</p>
+                <div className="mb-6 pb-6 border-b border-white/10">
+                  <p className="text-xs text-white/60 mb-3">Weekly Bookings</p>
+                  <div className="flex items-end justify-between gap-1 h-12">
+                    {[40, 65, 45, 78, 92, 55, 70].map((height, i) => (
+                      <div key={i} className="flex-1 bg-gradient-to-t from-gold to-gold-light rounded-t-sm opacity-80" style={{ height: `${height}%` }} />
+                    ))}
                   </div>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+                </div>
 
-      {/* ═══════════════ FINAL CTA ═══════════════ */}
-      <section className="py-20 lg:py-28 bg-gradient-to-br from-charcoal via-charcoal-light to-charcoal">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white mb-4">
-              Ready to grow your venue?
-            </h2>
-            <p className="text-lg text-gray-400 mb-10 max-w-xl mx-auto">
-              Join 340+ premium venues on TopSpots. Set up takes less than 15 minutes.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="https://topspots.global/apply"
-                className="inline-flex items-center justify-center gap-2 px-10 py-4 bg-gradient-to-r from-gold to-gold-light text-white text-lg font-semibold rounded-2xl shadow-xl shadow-gold/25 hover:shadow-gold/40 hover:scale-[1.02] transition-all">
-                Apply Now <ArrowRight className="w-5 h-5" />
-              </a>
-              <a href="mailto:hello@topspots.global"
-                className="inline-flex items-center justify-center px-10 py-4 border-2 border-white/20 text-white text-lg font-semibold rounded-2xl hover:bg-white/10 hover:border-white/40 transition-all">
-                Contact Us
-              </a>
+                <div>
+                  <p className="text-xs text-white/60 mb-3">Upcoming Reservations</p>
+                  <div className="space-y-2">
+                    {[{ name: 'Table 4 - Party of 2', time: '7:30 PM' }, { name: 'Table 2 - Party of 6', time: '8:00 PM' }].map((res, i) => (
+                      <div key={i} className="flex items-center justify-between text-sm p-2 bg-white/5 rounded border border-white/10">
+                        <p className="text-white font-medium">{res.name}</p>
+                        <p className="text-gold font-mono text-xs">{res.time}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
             </div>
           </motion.div>
         </div>
-      </section>
 
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.8 }}
+          className="absolute bottom-20 left-12 hidden lg:block"
+        >
+          <motion.div
+            animate={{ y: [-10, 10, -10] }}
+            transition={{ duration: 4, repeat: Infinity }}
+            className="glass-card p-4 rounded-lg max-w-xs border border-gold/40"
+          >
+            <p className="text-sm text-white font-medium"><span className="text-gold">New booking</span> from Anna K.</p>
+            <p className="text-xs text-white/60 mt-1">Table 3 • 7:45 PM</p>
+          </motion.div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1 }}
+          className="absolute bottom-40 right-12 hidden lg:block"
+        >
+          <motion.div
+            animate={{ y: [10, -10, 10] }}
+            transition={{ duration: 4, repeat: Infinity, delay: 0.5 }}
+            className="glass-card p-4 rounded-lg max-w-xs border border-gold/40"
+          >
+            <p className="text-sm text-white font-medium"><span className="text-gold">+25 PLN</span> tip received</p>
+            <p className="text-xs text-white/60 mt-1">From anonymous guest</p>
+          </motion.div>
+        </motion.div>
+      </div>
+    </section>
+  )
+}
+
+// Social Proof Bar
+function SocialProofBar() {
+  return (
+    <section className="py-12 border-y border-gold/20 bg-charcoal">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12" variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+          <Counter value="340+" label="Premium Venues" />
+          <Counter value="25,000+" label="Bookings Managed" />
+          <Counter value="4.8" label="Owner Satisfaction" />
+          <Counter value="8" label="Languages Supported" />
+        </motion.div>
+      </div>
+    </section>
+  )
+}
+
+// Venue Types Section
+function VenueTypesSection() {
+  return (
+    <section className="py-20 md:py-32 bg-surface">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <h2 className="text-4xl md:text-5xl font-['Instrument_Serif'] font-bold text-charcoal mb-4">
+            One platform, every venue type
+          </h2>
+          <p className="text-lg md:text-xl text-text-muted max-w-2xl mx-auto">
+            Whether you run a fine-dining restaurant, trendy bar, cozy cafe, or event space — TopSpots adapts to your needs.
+          </p>
+        </motion.div>
+
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
+          {[
+            { name: 'Restaurants', desc: 'Fine dining to casual', icon: Sparkles },
+            { name: 'Bars & Clubs', desc: 'Cocktail bars to nightclubs', icon: Heart },
+            { name: 'Cafes', desc: 'Coffee shops & bakeries', icon: Users },
+            { name: 'Events', desc: 'Venues & event spaces', icon: Calendar },
+          ].map((type, i) => {
+            const Icon = type.icon
+            return (
+              <motion.div
+                key={i}
+                variants={itemVariants}
+                className="card-3d group p-8 bg-surface-elevated rounded-2xl border border-gold/10 hover:border-gold/30 transition-all duration-300"
+              >
+                <Icon className="w-10 h-10 text-gold mb-4 group-hover:scale-110 transition-transform duration-300" />
+                <h3 className="text-xl font-semibold text-charcoal mb-2">{type.name}</h3>
+                <p className="text-text-muted">{type.desc}</p>
+              </motion.div>
+            )
+          })}
+        </motion.div>
+      </div>
+    </section>
+  )
+}
+
+// Features Section
+function FeaturesSection() {
+  return (
+    <section id="features" className="py-20 md:py-32 bg-charcoal relative overflow-hidden">
+      <div className="absolute inset-0 bg-gold-mesh opacity-40" />
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <h2 className="text-4xl md:text-5xl font-['Instrument_Serif'] font-bold text-white mb-4">
+            Everything your venue needs
+          </h2>
+          <p className="text-lg md:text-xl text-white/70 max-w-2xl mx-auto">
+            Powerful features built for modern hospitality venues.
+          </p>
+        </motion.div>
+
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-max"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
+          {[
+            {
+              title: 'Venue Profile & Menu',
+              desc: 'Rich venue page with photos, gallery, detailed menu items, and your unique story.',
+              icon: Users,
+              span: 'md:col-span-2',
+              tag: 'Core',
+            },
+            {
+              title: 'Smart Booking System',
+              desc: 'Customers book online, manage reservations, track parties.',
+              icon: Calendar,
+              span: '',
+              tag: 'Core',
+            },
+            {
+              title: 'QR Code System',
+              desc: 'Generate permanent QR codes for menus, reviews, and tipping.',
+              icon: QrCode,
+              span: '',
+              tag: 'Core',
+            },
+            {
+              title: 'Analytics Dashboard',
+              desc: 'Track bookings, profile views, revenue trends, and insights.',
+              icon: BarChart3,
+              span: '',
+              tag: 'Growth',
+            },
+            {
+              title: 'Digital Tipping',
+              desc: 'Staff earn tips directly via QR codes, cashless and instant.',
+              icon: Heart,
+              span: '',
+              tag: 'Revenue',
+            },
+            {
+              title: 'Staff Management',
+              desc: 'Add your team, assign roles, manage schedules professionally.',
+              icon: Users,
+              span: '',
+              tag: 'Core',
+            },
+          ].map((feature, i) => {
+            const Icon = feature.icon
+            return (
+              <motion.div
+                key={i}
+                variants={itemVariants}
+                className={`glass-card-gold p-8 rounded-2xl hover:gold-glow-sm transition-all duration-300 group cursor-pointer ${feature.span || 'md:col-span-1'}`}
+              >
+                <Icon className="w-10 h-10 text-gold mb-6 group-hover:scale-110 transition-transform duration-300" />
+                <h3 className="text-xl font-semibold text-white mb-3 group-hover:text-gold-light transition-colors">
+                  {feature.title}
+                </h3>
+                <p className="text-white/70 text-sm leading-relaxed mb-4">{feature.desc}</p>
+                <span className="inline-block px-3 py-1 text-xs font-medium text-gold bg-gold/10 rounded-full">
+                  {feature.tag}
+                </span>
+              </motion.div>
+            )
+          })}
+        </motion.div>
+      </div>
+    </section>
+  )
+}
+
+// How It Works
+function HowItWorksSection() {
+  return (
+    <section id="how-it-works" className="py-20 md:py-32 bg-surface">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <h2 className="text-4xl md:text-5xl font-['Instrument_Serif'] font-bold text-charcoal mb-4">
+            How it works
+          </h2>
+          <p className="text-lg md:text-xl text-text-muted max-w-2xl mx-auto">
+            Get your venue live in three simple steps.
+          </p>
+        </motion.div>
+
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-4"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
+          {[
+            { number: '1', title: 'Apply & Get Approved', desc: 'Submit your venue details. Our team reviews and approves your profile within 24 hours.' },
+            { number: '2', title: 'Set Up Your Profile', desc: 'Add photos, menus, staff, and customize your venue page. Generate QR codes for your tables.' },
+            { number: '3', title: 'Go Live & Grow', desc: 'Start accepting bookings, collecting reviews, and growing your digital presence.' },
+          ].map((step, i) => (
+            <motion.div key={i} variants={itemVariants} className="relative">
+              {i < 2 && (
+                <div className="hidden md:block absolute top-12 -right-2 w-4 h-0.5 bg-gradient-to-r from-gold to-transparent" />
+              )}
+
+              <div className="text-center">
+                <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-gold to-gold-light text-charcoal font-bold text-2xl mb-6 shadow-lg shadow-gold/30">
+                  {step.number}
+                </div>
+                <h3 className="text-xl font-semibold text-charcoal mb-3">{step.title}</h3>
+                <p className="text-text-muted leading-relaxed">{step.desc}</p>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
+    </section>
+  )
+}
+
+// Why TopSpots
+function WhyTopSpotsSection() {
+  return (
+    <section className="py-20 md:py-32 bg-charcoal relative overflow-hidden">
+      <div className="absolute inset-0 bg-gold-mesh opacity-40" />
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <h2 className="text-4xl md:text-5xl font-['Instrument_Serif'] font-bold text-white mb-4">
+            Why TopSpots
+          </h2>
+          <p className="text-lg md:text-xl text-white/70 max-w-2xl mx-auto">
+            The all-in-one platform designed for modern hospitality venues.
+          </p>
+        </motion.div>
+
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
+          {[
+            { title: 'Built for Poland & Europe', desc: 'Localized for the Polish and European market. Multi-currency, multi-language, local payment methods.', icon: Globe },
+            { title: 'All-in-One Platform', desc: 'No more juggling 5 different tools. Everything in one place.', icon: Zap },
+            { title: 'Zero Hardware Needed', desc: 'No tablets, no POS integration. Everything works through QR codes.', icon: Shield },
+            { title: 'Real-Time Analytics', desc: 'Know exactly how your venue is performing. Track trends and identify opportunities.', icon: TrendingUp },
+            { title: 'Staff Empowerment', desc: 'Give your team professional profiles, digital tipping, and performance tracking.', icon: Users },
+            { title: 'Dedicated Support', desc: 'Polish and English-speaking support team for onboarding and ongoing help.', icon: Headphones },
+          ].map((benefit, i) => {
+            const Icon = benefit.icon
+            return (
+              <motion.div
+                key={i}
+                variants={itemVariants}
+                className="glass-card-gold p-8 rounded-2xl hover:gold-glow-sm transition-all duration-300 group"
+              >
+                <Icon className="w-10 h-10 text-gold mb-4 group-hover:scale-110 transition-transform duration-300" />
+                <h3 className="text-lg font-semibold text-white mb-3 group-hover:text-gold-light transition-colors">
+                  {benefit.title}
+                </h3>
+                <p className="text-white/70 text-sm leading-relaxed">{benefit.desc}</p>
+              </motion.div>
+            )
+          })}
+        </motion.div>
+      </div>
+    </section>
+  )
+}
+
+// Pricing Section
+function PricingSection() {
+  return (
+    <section id="pricing" className="py-20 md:py-32 bg-surface">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <h2 className="text-4xl md:text-5xl font-['Instrument_Serif'] font-bold text-charcoal mb-4">
+            Pricing built for growth
+          </h2>
+          <p className="text-lg md:text-xl text-text-muted max-w-2xl mx-auto">
+            Start free, upgrade as you grow. All plans include a 30-day free trial.
+          </p>
+        </motion.div>
+
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-3 gap-8"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
+          {[
+            {
+              name: 'Basic',
+              price: '99',
+              popular: false,
+              features: [
+                { text: 'Venue profile & menu', included: true },
+                { text: 'Up to 50 bookings/month', included: true },
+                { text: 'Basic QR codes', included: true },
+                { text: 'Up to 5 staff profiles', included: true },
+                { text: 'Email support', included: true },
+                { text: 'Advanced analytics', included: false },
+              ],
+            },
+            {
+              name: 'Pro',
+              price: '199',
+              popular: true,
+              badge: 'Most Popular',
+              features: [
+                { text: 'Everything in Basic', included: true },
+                { text: 'Unlimited bookings', included: true },
+                { text: 'Advanced QR codes with analytics', included: true },
+                { text: 'Unlimited staff profiles', included: true },
+                { text: 'Reviews & ratings', included: true },
+                { text: 'Analytics dashboard', included: true },
+              ],
+            },
+            {
+              name: 'Pro+',
+              price: '399',
+              popular: false,
+              features: [
+                { text: 'Everything in Pro', included: true },
+                { text: 'Multi-language menus (8 languages)', included: true },
+                { text: 'Loyalty program', included: true },
+                { text: 'Advanced analytics & reports', included: true },
+                { text: 'Custom branding', included: true },
+                { text: 'API access', included: true },
+              ],
+            },
+          ].map((plan, i) => (
+            <motion.div
+              key={i}
+              variants={itemVariants}
+              className={`relative rounded-2xl overflow-hidden transition-all duration-300 ${
+                plan.popular
+                  ? 'md:scale-105 border-2 border-gold bg-charcoal-mid'
+                  : 'border border-gold/20 bg-surface-elevated'
+              }`}
+            >
+              {plan.popular && (
+                <div className="absolute -top-2 -right-2 px-4 py-1 bg-gradient-to-r from-gold to-gold-light text-charcoal text-xs font-bold rounded-bl-lg">
+                  {plan.badge}
+                </div>
+              )}
+
+              <div className="p-8">
+                <h3 className={`text-2xl font-semibold mb-2 ${plan.popular ? 'text-white' : 'text-charcoal'}`}>
+                  {plan.name}
+                </h3>
+                <div className="mb-6">
+                  <span className={`text-5xl font-bold font-mono ${plan.popular ? 'text-gold' : 'text-charcoal'}`}>
+                    {plan.price}
+                  </span>
+                  <span className={plan.popular ? 'text-white/70' : 'text-text-muted'}> PLN/mo</span>
+                </div>
+
+                <a
+                  href="https://topspots.global/apply"
+                  className={`block w-full py-3 px-4 rounded-lg font-semibold mb-8 text-center transition-all duration-300 ${
+                    plan.popular
+                      ? 'bg-gradient-to-r from-gold to-gold-light text-charcoal hover:shadow-lg hover:shadow-gold/30'
+                      : 'border border-gold/30 text-charcoal hover:bg-gold/5'
+                  }`}
+                >
+                  Start Free Trial
+                </a>
+
+                <div className="space-y-4">
+                  {plan.features.map((feature, j) => (
+                    <div key={j} className="flex items-start gap-3">
+                      {feature.included ? (
+                        <Check className={`w-5 h-5 flex-shrink-0 mt-0.5 ${plan.popular ? 'text-gold' : 'text-gold'}`} />
+                      ) : (
+                        <X className="w-5 h-5 flex-shrink-0 text-gray-300 mt-0.5" />
+                      )}
+                      <span className={`text-sm ${plan.popular ? 'text-white/80' : 'text-charcoal/70'}`}>
+                        {feature.text}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
+    </section>
+  )
+}
+
+// FAQ Item Component
+function FAQItem({ question, answer, index, openFaq, setOpenFaq }: { question: string; answer: string; index: number; openFaq: number | null; setOpenFaq: (i: number | null) => void }) {
+  return (
+    <motion.div
+      variants={itemVariants}
+      className="glass-card-gold rounded-lg p-6 cursor-pointer hover:gold-glow-sm transition-all duration-300"
+      onClick={() => setOpenFaq(openFaq === index ? null : index)}
+    >
+      <div className="flex items-center justify-between">
+        <h3 className="text-lg font-semibold text-white pr-4">{question}</h3>
+        <motion.div
+          animate={{ rotate: openFaq === index ? 180 : 0 }}
+          transition={{ duration: 0.3 }}
+          className="flex-shrink-0"
+        >
+          <ChevronDown className="w-5 h-5 text-gold" />
+        </motion.div>
+      </div>
+
+      <motion.div
+        initial={{ opacity: 0, height: 0 }}
+        animate={{ opacity: openFaq === index ? 1 : 0, height: openFaq === index ? 'auto' : 0 }}
+        transition={{ duration: 0.3 }}
+        className="overflow-hidden"
+      >
+        <p className="text-white/70 pt-4 leading-relaxed">{answer}</p>
+      </motion.div>
+    </motion.div>
+  )
+}
+
+// FAQ Section
+function FAQSection() {
+  const [openFaq, setOpenFaq] = useState<number | null>(null)
+
+  return (
+    <section id="faq" className="py-20 md:py-32 bg-charcoal relative overflow-hidden">
+      <div className="absolute inset-0 bg-gold-mesh opacity-30" />
+
+      <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <h2 className="text-4xl md:text-5xl font-['Instrument_Serif'] font-bold text-white mb-4">
+            Frequently asked questions
+          </h2>
+          <p className="text-lg text-white/70">
+            Everything you need to know about TopSpots for your venue.
+          </p>
+        </motion.div>
+
+        <motion.div
+          className="space-y-4"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
+          {[
+            { q: 'How long does the approval process take?', a: 'Most venues are approved within 24 hours. We review your submission to ensure quality and accuracy.' },
+            { q: 'Do I need any special hardware?', a: 'No. TopSpots works entirely through web browsers and QR codes. No POS integration, tablets, or special equipment needed.' },
+            { q: 'Can I customize my venue\'s profile?', a: 'Absolutely. You control your photos, menu, description, opening hours, and more. Your profile is your digital storefront.' },
+            { q: 'How does the tipping system work?', a: 'Customers scan a QR code at your venue to tip staff directly. Tips are processed digitally — no cash handling needed.' },
+            { q: 'Is there a contract or commitment?', a: 'No long-term contracts. All plans are month-to-month. You can upgrade, downgrade, or cancel anytime.' },
+            { q: 'What languages are supported?', a: 'The platform supports 8 languages: English, Polish, Ukrainian, German, Spanish, French, Italian, and Portuguese.' },
+          ].map((faq, i) => (
+            <FAQItem key={i} question={faq.q} answer={faq.a} index={i} openFaq={openFaq} setOpenFaq={setOpenFaq} />
+          ))}
+        </motion.div>
+      </div>
+    </section>
+  )
+}
+
+// Final CTA Section
+function FinalCTASection() {
+  return (
+    <section className="py-20 md:py-32 bg-charcoal relative overflow-hidden">
+      <div className="absolute inset-0 bg-gold-mesh opacity-50" />
+      <motion.div
+        animate={{
+          backgroundPosition: ['0% 0%', '100% 100%', '0% 0%'],
+        }}
+        transition={{ duration: 20, repeat: Infinity }}
+        className="absolute inset-0 opacity-30"
+        style={{
+          background: 'radial-gradient(ellipse 80% 80% at 50% 50%, rgba(201, 161, 74, 0.15), transparent)',
+          backgroundSize: '200% 200%',
+        }}
+      />
+      <div className="absolute inset-0 grain opacity-20" />
+
+      <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <motion.h2
+          className="text-4xl md:text-6xl font-['Instrument_Serif'] font-bold text-white mb-6"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+        >
+          Ready to transform your venue?
+        </motion.h2>
+
+        <motion.p
+          className="text-xl md:text-2xl text-white/80 mb-10 leading-relaxed"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.1, duration: 0.8 }}
+        >
+          Join 340+ premium venues already growing with TopSpots.
+        </motion.p>
+
+        <motion.a
+          href="https://topspots.global/apply"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.2, duration: 0.8 }}
+          whileHover={{ scale: 1.05 }}
+          className="inline-flex items-center justify-center gap-3 px-10 py-5 bg-gradient-to-r from-gold to-gold-light text-charcoal font-bold text-lg rounded-xl shadow-xl shadow-gold/30 hover:shadow-gold/50 transition-all duration-300"
+        >
+          Start Your Free Trial
+          <Sparkles className="w-6 h-6" />
+        </motion.a>
+
+        <p className="text-white/60 mt-6 text-sm">
+          30-day free trial · No credit card · Cancel anytime
+        </p>
+      </div>
+    </section>
+  )
+}
+
+// Main Page Component
+export default function VenuesLanding() {
+  return (
+    <div className="min-h-screen bg-charcoal">
+      <Navbar />
+      <HeroSection />
+      <SocialProofBar />
+      <VenueTypesSection />
+      <FeaturesSection />
+      <HowItWorksSection />
+      <WhyTopSpotsSection />
+      <PricingSection />
+      <FAQSection />
+      <FinalCTASection />
       <Footer />
     </div>
   )
