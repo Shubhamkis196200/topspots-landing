@@ -11,6 +11,9 @@ export default function Navbar() {
   const location = useLocation()
 
   const isVenues = location.pathname === '/venues'
+  const isStaff = location.pathname === '/staff'
+  const isMarketplace = location.pathname === '/marketplace'
+  const pageLabel = isVenues ? 'For Venues' : isStaff ? 'For Staff' : isMarketplace ? 'Marketplace' : ''
 
   // Detect scroll for glass morphism effect
   useEffect(() => {
@@ -38,7 +41,7 @@ export default function Navbar() {
   const navLinks = [
     { label: 'Features', href: 'features' },
     { label: 'How It Works', href: 'how-it-works' },
-    ...(isVenues ? [{ label: 'Pricing', href: 'pricing' }] : []),
+    ...(isVenues || isMarketplace ? [{ label: 'Pricing', href: 'pricing' }] : []),
     { label: 'FAQ', href: 'faq' },
   ]
 
@@ -67,9 +70,11 @@ export default function Navbar() {
               <span className="hidden sm:inline font-display text-lg font-semibold text-white">
                 TopSpots
               </span>
-              <span className="px-2.5 py-1 bg-gradient-to-r from-gold to-gold-light rounded-full text-[10px] sm:text-[11px] font-semibold text-white tracking-widest uppercase shadow-lg shadow-gold/20">
-                {isVenues ? 'For Venues' : 'For Staff'}
-              </span>
+              {pageLabel && (
+                <span className="px-2.5 py-1 bg-gradient-to-r from-gold to-gold-light rounded-full text-[10px] sm:text-[11px] font-semibold text-white tracking-widest uppercase shadow-lg shadow-gold/20">
+                  {pageLabel}
+                </span>
+              )}
             </Link>
 
             {/* Desktop Navigation Links */}
@@ -92,14 +97,28 @@ export default function Navbar() {
             {/* Desktop CTAs */}
             <div className="hidden lg:flex items-center gap-3">
               <Link
-                to={isVenues ? '/staff' : '/venues'}
+                to="/venues"
                 className={`text-sm font-medium transition-colors duration-200 px-3 py-2 rounded-lg ${
-                  isScrolled
-                    ? 'text-white/60 hover:text-gold'
-                    : 'text-white/60 hover:text-gold'
+                  isVenues ? 'text-gold' : 'text-white/60 hover:text-gold'
                 }`}
               >
-                {isVenues ? 'For Staff' : 'For Venues'}
+                For Venues
+              </Link>
+              <Link
+                to="/staff"
+                className={`text-sm font-medium transition-colors duration-200 px-3 py-2 rounded-lg ${
+                  location.pathname === '/staff' ? 'text-gold' : 'text-white/60 hover:text-gold'
+                }`}
+              >
+                For Staff
+              </Link>
+              <Link
+                to="/marketplace"
+                className={`text-sm font-medium transition-colors duration-200 px-3 py-2 rounded-lg ${
+                  isMarketplace ? 'text-gold' : 'text-white/60 hover:text-gold'
+                }`}
+              >
+                Marketplace
               </Link>
 
               <a
