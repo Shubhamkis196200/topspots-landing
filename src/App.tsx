@@ -3,6 +3,10 @@ import Home from './pages/Home'
 import VenuesLanding from './pages/VenuesLanding'
 import StaffLanding from './pages/StaffLanding'
 import Marketplace from './pages/Marketplace'
+import StaffDesignA from './pages/StaffDesignA'
+import StaffDesignB from './pages/StaffDesignB'
+import VenueDesignA from './pages/VenueDesignA'
+import VenueDesignB from './pages/VenueDesignB'
 
 export default function App() {
   return (
@@ -11,6 +15,10 @@ export default function App() {
       <Route path="/venues" element={<VenuesLanding />} />
       <Route path="/staff" element={<StaffLanding />} />
       <Route path="/marketplace" element={<Marketplace />} />
+      <Route path="/design-v3/staff-a" element={<StaffDesignA />} />
+      <Route path="/design-v3/staff-b" element={<StaffDesignB />} />
+      <Route path="/design-v3/venue-a" element={<VenueDesignA />} />
+      <Route path="/design-v3/venue-b" element={<VenueDesignB />} />
     </Routes>
   )
 }
