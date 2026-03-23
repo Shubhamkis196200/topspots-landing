@@ -6,6 +6,7 @@ import Marketplace from './pages/Marketplace'
 import MarketplaceDemo from './pages/MarketplaceDemo'
 import MarketplaceStaffView from './pages/MarketplaceStaffView'
 import MarketplaceVenueView from './pages/MarketplaceVenueView'
+import MarketplacePublic from './pages/MarketplacePublic'
 import StaffDesignA from './pages/StaffDesignA'
 import StaffDesignB from './pages/StaffDesignB'
 import VenueDesignA from './pages/VenueDesignA'
@@ -21,6 +22,7 @@ export default function App() {
       <Route path="/marketplace/demo" element={<MarketplaceDemo />} />
       <Route path="/marketplace/staff" element={<MarketplaceStaffView />} />
       <Route path="/marketplace/venue" element={<MarketplaceVenueView />} />
+      <Route path="/marketplace/explore" element={<MarketplacePublic />} />
       <Route path="/design-v3/staff-a" element={<StaffDesignA />} />
       <Route path="/design-v3/staff-b" element={<StaffDesignB />} />
       <Route path="/design-v3/venue-a" element={<VenueDesignA />} />
