@@ -14,31 +14,22 @@ import {
   Eye,
   Star,
   DollarSign,
-  AlertTriangle,
   Layers,
   Banknote,
   ArrowRight,
   Bell,
   Clock,
-  Palette,
-  Code,
   Crown,
   Heart,
-  Shield,
-  Zap,
 } from 'lucide-react'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 
-// Animation variants
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.2,
-    },
+    transition: { staggerChildren: 0.1, delayChildren: 0.2 },
   },
 }
 
@@ -51,7 +42,6 @@ const itemVariants = {
   },
 }
 
-// Counter component
 function Counter({ value, label }: { value: string; label: string }) {
   const [displayValue, setDisplayValue] = useState(0)
   const numValue = parseInt(value.replace(/[^0-9]/g, ''), 10)
@@ -75,17 +65,15 @@ function Counter({ value, label }: { value: string; label: string }) {
       }}
       className="text-center"
     >
-      <div className="font-mono text-2xl md:text-3xl font-semibold text-gold mb-2">
+      <div className="font-mono text-2xl md:text-3xl font-semibold text-gradient-gold mb-2">
         {displayValue > 0 ? `${displayValue.toLocaleString()}+` : value}
       </div>
-      <p className="text-sm md:text-base text-white/70">{label}</p>
+      <p className="text-sm md:text-base text-text-muted">{label}</p>
     </motion.div>
   )
 }
 
-// ──────────────────────────────────────────────
 // HERO SECTION
-// ──────────────────────────────────────────────
 function HeroSection() {
   const stats = [
     { label: 'Bookings', value: '18' },
@@ -104,19 +92,8 @@ function HeroSection() {
   ]
 
   return (
-    <section className="relative min-h-screen pt-24 pb-16 bg-[#0D0D0F] overflow-hidden">
-      <div className="absolute inset-0 bg-gold-mesh opacity-40" />
-      <motion.div
-        animate={{ backgroundPosition: ['0% 0%', '100% 100%', '0% 0%'] }}
-        transition={{ duration: 20, repeat: Infinity }}
-        className="absolute inset-0 opacity-30"
-        style={{
-          background:
-            'radial-gradient(ellipse 60% 60% at 50% 40%, rgba(201, 161, 74, 0.12), transparent)',
-          backgroundSize: '200% 200%',
-        }}
-      />
-      <div className="absolute inset-0 grain opacity-30" />
+    <section className="relative min-h-screen pt-24 pb-16 bg-[#FDFCFA] overflow-hidden">
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-gold/6 rounded-full blur-[160px]" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center min-h-[80vh]">
@@ -126,25 +103,24 @@ function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            {/* Badge */}
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.2 }}
-              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gold/10 border border-gold/20 mb-6"
+              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gold/8 border border-gold/15 mb-6"
             >
               <Sparkles className="w-3.5 h-3.5 text-gold" />
-              <span className="text-xs font-medium text-gold tracking-wide uppercase">
+              <span className="text-xs font-medium text-gold-dark tracking-wide uppercase">
                 The #1 Venue Platform in Poland
               </span>
             </motion.div>
 
-            <h1 className="font-['Instrument_Serif'] text-4xl sm:text-5xl lg:text-6xl xl:text-7xl text-white leading-[1.1] mb-6">
+            <h1 className="font-['Instrument_Serif'] text-4xl sm:text-5xl lg:text-6xl xl:text-7xl text-charcoal leading-[1.1] mb-6">
               Everything your venue needs to{' '}
               <span className="text-gradient-gold">thrive</span>
             </h1>
 
-            <p className="text-lg sm:text-xl text-white/60 leading-relaxed mb-8 max-w-xl">
+            <p className="text-lg sm:text-xl text-text-muted leading-relaxed mb-8 max-w-xl">
               Bookings, digital menus, QR ordering, staff management, reviews,
               analytics, and tipping — all in one calm, powerful platform built
               for hospitality.
@@ -156,7 +132,7 @@ function HeroSection() {
                 (pill) => (
                   <span
                     key={pill}
-                    className="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-sm text-white/70"
+                    className="px-3 py-1.5 rounded-full bg-[#F5F3EF] border border-gray-200 text-sm text-charcoal-mid"
                   >
                     {pill}
                   </span>
@@ -168,20 +144,20 @@ function HeroSection() {
             <div className="flex flex-col sm:flex-row gap-4 mb-6">
               <a
                 href="https://topspots.global/apply"
-                className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl bg-gradient-to-r from-gold to-gold-light text-charcoal font-semibold text-base gold-glow hover:brightness-110 transition-all duration-300"
+                className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl bg-gradient-to-r from-gold to-gold-light text-white font-semibold text-base shadow-lg shadow-gold/20 hover:shadow-xl hover:scale-[1.02] transition-all duration-300"
               >
                 Start Free Trial
                 <ArrowRight className="w-4 h-4" />
               </a>
               <a
                 href="#dashboard"
-                className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl bg-transparent border border-white/20 text-white font-medium text-base hover:bg-white/5 transition-all duration-300"
+                className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl bg-white border border-gray-200 text-charcoal font-medium text-base hover:border-gold/30 hover:shadow-md transition-all duration-300"
               >
                 See How It Works
               </a>
             </div>
 
-            <p className="text-sm text-white/40">
+            <p className="text-sm text-text-muted">
               30-day free trial &middot; No credit card &middot; Cancel anytime
             </p>
           </motion.div>
@@ -193,13 +169,15 @@ function HeroSection() {
             transition={{ duration: 0.9, delay: 0.3 }}
             className="relative hidden lg:block"
           >
-            {/* Main dashboard card */}
-            <div className="glass-card-gold rounded-2xl p-6 relative">
+            <div className="bg-white rounded-2xl p-6 shadow-xl border border-gray-100 relative">
               <div className="flex items-center justify-between mb-5">
-                <h3 className="font-['Instrument_Serif'] text-xl text-white">
+                <h3 className="font-['Instrument_Serif'] text-xl text-charcoal">
                   Today's Overview
                 </h3>
-                <span className="text-xs text-white/40">Live</span>
+                <div className="flex items-center gap-1.5">
+                  <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                  <span className="text-xs text-emerald-600">Live</span>
+                </div>
               </div>
 
               {/* Stats grid */}
@@ -207,10 +185,10 @@ function HeroSection() {
                 {stats.map((stat) => (
                   <div
                     key={stat.label}
-                    className="bg-white/5 rounded-xl p-3 border border-white/5"
+                    className="bg-[#F8F9FB] rounded-xl p-3 border border-gray-100"
                   >
-                    <p className="text-xs text-white/40 mb-1">{stat.label}</p>
-                    <p className="text-lg font-semibold text-white">
+                    <p className="text-xs text-text-muted mb-1">{stat.label}</p>
+                    <p className="text-lg font-semibold text-charcoal">
                       {stat.value}
                     </p>
                   </div>
@@ -219,7 +197,7 @@ function HeroSection() {
 
               {/* Weekly bookings bar chart */}
               <div className="mb-5">
-                <p className="text-xs text-white/40 mb-3">Weekly Bookings</p>
+                <p className="text-xs text-text-muted mb-3">Weekly Bookings</p>
                 <div className="flex items-end gap-2 h-20">
                   {weeklyData.map((val, i) => (
                     <div key={i} className="flex-1 flex flex-col items-center gap-1">
@@ -229,7 +207,7 @@ function HeroSection() {
                         transition={{ duration: 0.8, delay: 0.5 + i * 0.08 }}
                         className="w-full rounded-t-md bg-gradient-to-t from-gold/60 to-gold"
                       />
-                      <span className="text-[10px] text-white/30">
+                      <span className="text-[10px] text-text-muted">
                         {days[i]}
                       </span>
                     </div>
@@ -239,22 +217,22 @@ function HeroSection() {
 
               {/* Upcoming reservations */}
               <div>
-                <p className="text-xs text-white/40 mb-2">
+                <p className="text-xs text-text-muted mb-2">
                   Upcoming Reservations
                 </p>
                 <div className="space-y-2">
                   {reservations.map((r, i) => (
                     <div
                       key={i}
-                      className="flex items-center justify-between bg-white/5 rounded-lg px-3 py-2"
+                      className="flex items-center justify-between bg-[#F8F9FB] rounded-lg px-3 py-2 border border-gray-100"
                     >
                       <div className="flex items-center gap-2">
-                        <div className="w-7 h-7 rounded-full bg-gold/20 flex items-center justify-center text-xs text-gold font-medium">
+                        <div className="w-7 h-7 rounded-full bg-gold/10 flex items-center justify-center text-xs text-gold-dark font-medium">
                           {r.name.charAt(0)}
                         </div>
-                        <span className="text-sm text-white/80">{r.name}</span>
+                        <span className="text-sm text-charcoal-mid">{r.name}</span>
                       </div>
-                      <div className="flex items-center gap-3 text-xs text-white/40">
+                      <div className="flex items-center gap-3 text-xs text-text-muted">
                         <span>{r.time}</span>
                         <span>{r.guests} guests</span>
                       </div>
@@ -269,14 +247,14 @@ function HeroSection() {
               initial={{ opacity: 0, x: 20, y: -10 }}
               animate={{ opacity: 1, x: 0, y: 0 }}
               transition={{ delay: 1.2, duration: 0.6 }}
-              className="absolute -top-4 -right-4 glass-card rounded-xl px-4 py-2.5 flex items-center gap-2 border border-gold/20 shadow-lg animate-float"
+              className="absolute -top-4 -right-4 bg-white rounded-xl px-4 py-2.5 flex items-center gap-2 border border-gray-100 shadow-lg animate-float"
             >
-              <div className="w-8 h-8 rounded-full bg-gold/20 flex items-center justify-center">
+              <div className="w-8 h-8 rounded-full bg-gold/10 flex items-center justify-center">
                 <Bell className="w-4 h-4 text-gold" />
               </div>
               <div>
-                <p className="text-xs font-medium text-white">New Booking</p>
-                <p className="text-[10px] text-white/40">Table for 4 at 20:00</p>
+                <p className="text-xs font-medium text-charcoal">New Booking</p>
+                <p className="text-[10px] text-text-muted">Table for 4 at 20:00</p>
               </div>
             </motion.div>
 
@@ -285,15 +263,15 @@ function HeroSection() {
               initial={{ opacity: 0, x: -20, y: 10 }}
               animate={{ opacity: 1, x: 0, y: 0 }}
               transition={{ delay: 1.6, duration: 0.6 }}
-              className="absolute -bottom-4 -left-4 glass-card rounded-xl px-4 py-2.5 flex items-center gap-2 border border-gold/20 shadow-lg animate-float"
+              className="absolute -bottom-4 -left-4 bg-white rounded-xl px-4 py-2.5 flex items-center gap-2 border border-gray-100 shadow-lg animate-float"
               style={{ animationDelay: '1s' }}
             >
-              <div className="w-8 h-8 rounded-full bg-emerald-500/20 flex items-center justify-center">
-                <DollarSign className="w-4 h-4 text-emerald-400" />
+              <div className="w-8 h-8 rounded-full bg-emerald-50 flex items-center justify-center">
+                <DollarSign className="w-4 h-4 text-emerald-500" />
               </div>
               <div>
-                <p className="text-xs font-medium text-white">Tip Received</p>
-                <p className="text-[10px] text-white/40">25 PLN for Kasia M.</p>
+                <p className="text-xs font-medium text-charcoal">Tip Received</p>
+                <p className="text-[10px] text-text-muted">25 PLN for Kasia M.</p>
               </div>
             </motion.div>
           </motion.div>
@@ -303,9 +281,7 @@ function HeroSection() {
   )
 }
 
-// ──────────────────────────────────────────────
 // PAIN POINTS SECTION
-// ──────────────────────────────────────────────
 function PainPointsSection() {
   const painPoints = [
     {
@@ -315,8 +291,8 @@ function PainPointsSection() {
         'Multiple apps for bookings, menus, and staff scheduling. Hours wasted switching between platforms that don\'t talk to each other.',
       solution:
         'One unified dashboard for every aspect of your venue operations.',
-      color: 'text-red-400',
-      bg: 'bg-red-500/10',
+      color: 'text-red-500',
+      bg: 'bg-red-50',
     },
     {
       icon: Eye,
@@ -325,8 +301,8 @@ function PainPointsSection() {
         'No digital presence means missed customers every single day. Lost revenue from people who searched but couldn\'t find you.',
       solution:
         'A premium venue profile that ranks on search and converts browsers into guests.',
-      color: 'text-amber-400',
-      bg: 'bg-amber-500/10',
+      color: 'text-amber-500',
+      bg: 'bg-amber-50',
     },
     {
       icon: Banknote,
@@ -335,16 +311,14 @@ function PainPointsSection() {
         'Paper tips, manual revenue tracking, staff frustration over fairness. End-of-month accounting becomes a nightmare.',
       solution:
         'Digital tipping, automated tracking, and transparent staff payouts.',
-      color: 'text-orange-400',
-      bg: 'bg-orange-500/10',
+      color: 'text-orange-500',
+      bg: 'bg-orange-50',
     },
   ]
 
   return (
-    <section className="relative py-24 bg-surface overflow-hidden">
-      <div className="absolute inset-0 dot-pattern opacity-30" />
-
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-24 bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -354,7 +328,7 @@ function PainPointsSection() {
         >
           <motion.p
             variants={itemVariants}
-            className="text-sm font-medium text-gold tracking-wide uppercase mb-3"
+            className="text-sm font-medium text-gold-dark tracking-wide uppercase mb-3"
           >
             The Problem
           </motion.p>
@@ -384,16 +358,14 @@ function PainPointsSection() {
             <motion.div
               key={point.title}
               variants={itemVariants}
-              className="bg-surface-elevated rounded-2xl p-6 border border-charcoal/5 hover:shadow-lg transition-shadow duration-300"
+              className="bg-white rounded-2xl p-6 border border-gray-100 hover:border-gold/20 hover:shadow-lg transition-all duration-300"
             >
-              {/* Icon */}
               <div
                 className={`w-12 h-12 rounded-xl ${point.bg} flex items-center justify-center mb-4`}
               >
                 <point.icon className={`w-6 h-6 ${point.color}`} />
               </div>
 
-              {/* Pain */}
               <h3 className="font-['Instrument_Serif'] text-xl text-charcoal mb-2">
                 {point.title}
               </h3>
@@ -401,19 +373,17 @@ function PainPointsSection() {
                 {point.description}
               </p>
 
-              {/* Divider */}
               <div className="w-full h-px bg-gradient-to-r from-transparent via-gold/30 to-transparent mb-5" />
 
-              {/* Solution */}
               <div className="flex items-start gap-2">
                 <div className="w-5 h-5 rounded-full bg-gold/10 flex items-center justify-center flex-shrink-0 mt-0.5">
                   <Check className="w-3 h-3 text-gold" />
                 </div>
                 <div>
-                  <p className="text-xs font-medium text-gold mb-1">
+                  <p className="text-xs font-medium text-gold-dark mb-1">
                     With TopSpots:
                   </p>
-                  <p className="text-sm text-charcoal/80">{point.solution}</p>
+                  <p className="text-sm text-charcoal-mid">{point.solution}</p>
                 </div>
               </div>
             </motion.div>
@@ -424,9 +394,7 @@ function PainPointsSection() {
   )
 }
 
-// ──────────────────────────────────────────────
 // DASHBOARD MOCKUP SECTION
-// ──────────────────────────────────────────────
 function DashboardSection() {
   const features = [
     { icon: Calendar, label: 'Real-time bookings' },
@@ -451,13 +419,8 @@ function DashboardSection() {
   ]
 
   return (
-    <section
-      id="dashboard"
-      className="relative py-24 bg-charcoal overflow-hidden"
-    >
-      <div className="absolute inset-0 grain opacity-20" />
-
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="dashboard" className="py-24 bg-[#F8F9FB]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left — Copy */}
           <motion.div
@@ -468,13 +431,13 @@ function DashboardSection() {
           >
             <motion.p
               variants={itemVariants}
-              className="text-sm font-medium text-gold tracking-wide uppercase mb-3"
+              className="text-sm font-medium text-gold-dark tracking-wide uppercase mb-3"
             >
               Command Center
             </motion.p>
             <motion.h2
               variants={itemVariants}
-              className="font-['Instrument_Serif'] text-3xl sm:text-4xl lg:text-5xl text-white mb-6 leading-tight"
+              className="font-['Instrument_Serif'] text-3xl sm:text-4xl lg:text-5xl text-charcoal mb-6 leading-tight"
             >
               Your command center
               <br />
@@ -482,7 +445,7 @@ function DashboardSection() {
             </motion.h2>
             <motion.p
               variants={itemVariants}
-              className="text-lg text-white/60 leading-relaxed mb-8 max-w-md"
+              className="text-lg text-text-muted leading-relaxed mb-8 max-w-md"
             >
               See everything that matters at a glance. From today's bookings to
               this month's revenue trends — all in one place.
@@ -498,10 +461,10 @@ function DashboardSection() {
                   variants={itemVariants}
                   className="flex items-center gap-3 group"
                 >
-                  <div className="w-10 h-10 rounded-xl bg-gold/10 border border-gold/20 flex items-center justify-center group-hover:bg-gold/20 transition-colors">
+                  <div className="w-10 h-10 rounded-xl bg-gold/8 border border-gold/15 flex items-center justify-center group-hover:bg-gold/15 transition-colors">
                     <feature.icon className="w-5 h-5 text-gold" />
                   </div>
-                  <span className="text-base text-white/80 font-medium">
+                  <span className="text-base text-charcoal-mid font-medium">
                     {feature.label}
                   </span>
                 </motion.div>
@@ -516,34 +479,32 @@ function DashboardSection() {
             viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.8 }}
           >
-            <div className="glass-card rounded-2xl p-6 border border-white/10">
-              {/* Header */}
+            <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-xl">
               <div className="flex items-center justify-between mb-5">
                 <div>
-                  <h3 className="font-['Instrument_Serif'] text-lg text-white">
+                  <h3 className="font-['Instrument_Serif'] text-lg text-charcoal">
                     Dashboard
                   </h3>
-                  <p className="text-xs text-white/40">Saturday, March 23</p>
+                  <p className="text-xs text-text-muted">Saturday, March 23</p>
                 </div>
                 <div className="flex items-center gap-1.5">
                   <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                  <span className="text-xs text-emerald-400">Live</span>
+                  <span className="text-xs text-emerald-600">Live</span>
                 </div>
               </div>
 
-              {/* Stat cards */}
               <div className="grid grid-cols-2 gap-3 mb-5">
                 {statCards.map((s) => (
                   <div
                     key={s.label}
-                    className="bg-white/5 rounded-xl p-3 border border-white/5"
+                    className="bg-[#F8F9FB] rounded-xl p-3 border border-gray-100"
                   >
-                    <p className="text-xs text-white/40 mb-1">{s.label}</p>
+                    <p className="text-xs text-text-muted mb-1">{s.label}</p>
                     <div className="flex items-end gap-2">
-                      <p className="text-lg font-semibold text-white">
+                      <p className="text-lg font-semibold text-charcoal">
                         {s.value}
                       </p>
-                      <span className="text-xs text-emerald-400 mb-0.5">
+                      <span className="text-xs text-emerald-500 mb-0.5">
                         {s.change}
                       </span>
                     </div>
@@ -551,9 +512,8 @@ function DashboardSection() {
                 ))}
               </div>
 
-              {/* Booking chart */}
               <div className="mb-5">
-                <p className="text-xs text-white/40 mb-3">
+                <p className="text-xs text-text-muted mb-3">
                   Bookings This Week
                 </p>
                 <div className="flex items-end gap-2 h-24">
@@ -569,7 +529,7 @@ function DashboardSection() {
                         transition={{ duration: 0.6, delay: 0.3 + i * 0.06 }}
                         className="w-full rounded-t-md bg-gradient-to-t from-gold/50 to-gold"
                       />
-                      <span className="text-[10px] text-white/30">
+                      <span className="text-[10px] text-text-muted">
                         {chartDays[i]}
                       </span>
                     </div>
@@ -577,35 +537,34 @@ function DashboardSection() {
                 </div>
               </div>
 
-              {/* Reservations list */}
               <div>
-                <p className="text-xs text-white/40 mb-2">Reservations</p>
+                <p className="text-xs text-text-muted mb-2">Reservations</p>
                 <div className="space-y-2">
                   {reservations.map((r, i) => (
                     <div
                       key={i}
-                      className="flex items-center justify-between bg-white/5 rounded-lg px-3 py-2"
+                      className="flex items-center justify-between bg-[#F8F9FB] rounded-lg px-3 py-2 border border-gray-100"
                     >
                       <div className="flex items-center gap-2">
-                        <div className="w-7 h-7 rounded-full bg-gold/20 flex items-center justify-center text-xs text-gold font-medium">
+                        <div className="w-7 h-7 rounded-full bg-gold/10 flex items-center justify-center text-xs text-gold-dark font-medium">
                           {r.name.charAt(0)}
                         </div>
                         <div>
-                          <span className="text-sm text-white/80 block leading-tight">
+                          <span className="text-sm text-charcoal-mid block leading-tight">
                             {r.name}
                           </span>
-                          <span className="text-[10px] text-white/30">
+                          <span className="text-[10px] text-text-muted">
                             {r.guests} guests
                           </span>
                         </div>
                       </div>
                       <div className="flex items-center gap-3">
-                        <span className="text-xs text-white/40">{r.time}</span>
+                        <span className="text-xs text-text-muted">{r.time}</span>
                         <span
                           className={`text-[10px] px-2 py-0.5 rounded-full ${
                             r.status === 'Confirmed'
-                              ? 'bg-emerald-500/10 text-emerald-400'
-                              : 'bg-amber-500/10 text-amber-400'
+                              ? 'bg-emerald-50 text-emerald-600 border border-emerald-200'
+                              : 'bg-amber-50 text-amber-600 border border-amber-200'
                           }`}
                         >
                           {r.status}
@@ -623,23 +582,18 @@ function DashboardSection() {
   )
 }
 
-// ──────────────────────────────────────────────
 // SOCIAL PROOF SECTION
-// ──────────────────────────────────────────────
 function SocialProofSection() {
   const stats = [
     { value: '340+', label: 'Premium Venues' },
-    { value: '25,000+', label: 'Bookings Managed' },
+    { value: '25000+', label: 'Bookings Managed' },
     { value: '4.8/5', label: 'Owner Satisfaction' },
     { value: '8', label: 'Languages' },
   ]
 
   return (
-    <section className="relative py-20 bg-charcoal overflow-hidden">
-      <div className="absolute inset-0 bg-gold-mesh opacity-30" />
-      <div className="absolute inset-0 grain opacity-20" />
-
-      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-20 bg-white">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -647,10 +601,10 @@ function SocialProofSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <p className="text-sm font-medium text-gold tracking-wide uppercase mb-3">
+          <p className="text-sm font-medium text-gold-dark tracking-wide uppercase mb-3">
             Trusted by the best
           </p>
-          <h2 className="font-['Instrument_Serif'] text-3xl sm:text-4xl text-white">
+          <h2 className="font-['Instrument_Serif'] text-3xl sm:text-4xl text-charcoal">
             Numbers that speak for themselves
           </h2>
         </motion.div>
@@ -665,9 +619,7 @@ function SocialProofSection() {
   )
 }
 
-// ──────────────────────────────────────────────
 // PRICING SECTION
-// ──────────────────────────────────────────────
 interface PricingFeature {
   text: string
   included: boolean
@@ -744,10 +696,8 @@ function PricingSection() {
   ]
 
   return (
-    <section id="pricing" className="relative py-24 bg-surface overflow-hidden">
-      <div className="absolute inset-0 dot-pattern opacity-30" />
-
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="pricing" className="py-24 bg-[#F8F9FB]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -757,7 +707,7 @@ function PricingSection() {
         >
           <motion.p
             variants={itemVariants}
-            className="text-sm font-medium text-gold tracking-wide uppercase mb-3"
+            className="text-sm font-medium text-gold-dark tracking-wide uppercase mb-3"
           >
             Pricing
           </motion.p>
@@ -788,14 +738,13 @@ function PricingSection() {
               variants={itemVariants}
               className={`relative rounded-2xl p-6 border transition-shadow duration-300 ${
                 tier.highlighted
-                  ? 'bg-charcoal-mid border-gold/40 scale-100 md:scale-105 shadow-2xl z-10'
-                  : 'bg-surface-elevated border-gold/20 hover:shadow-lg'
+                  ? 'bg-white border-gold/30 scale-100 md:scale-105 shadow-xl z-10'
+                  : 'bg-white border-gray-100 hover:shadow-lg'
               }`}
             >
-              {/* Badge */}
               {tier.badge && (
                 <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                  <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-gradient-to-r from-gold to-gold-light text-charcoal text-xs font-semibold">
+                  <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-gradient-to-r from-gold to-gold-light text-white text-xs font-semibold">
                     <Crown className="w-3 h-3" />
                     {tier.badge}
                   </span>
@@ -803,32 +752,19 @@ function PricingSection() {
               )}
 
               <div className={`${tier.highlighted ? 'pt-2' : ''}`}>
-                <h3
-                  className={`font-['Instrument_Serif'] text-2xl mb-1 ${
-                    tier.highlighted ? 'text-white' : 'text-charcoal'
-                  }`}
-                >
+                <h3 className="font-['Instrument_Serif'] text-2xl mb-1 text-charcoal">
                   {tier.name}
                 </h3>
 
                 <div className="flex items-baseline gap-1 mb-6">
-                  <span
-                    className={`text-4xl font-bold ${
-                      tier.highlighted ? 'text-gold' : 'text-charcoal'
-                    }`}
-                  >
+                  <span className={`text-4xl font-bold ${tier.highlighted ? 'text-gradient-gold' : 'text-charcoal'}`}>
                     {tier.price}
                   </span>
-                  <span
-                    className={`text-sm ${
-                      tier.highlighted ? 'text-white/40' : 'text-text-muted'
-                    }`}
-                  >
+                  <span className="text-sm text-text-muted">
                     PLN{tier.period}
                   </span>
                 </div>
 
-                {/* Features */}
                 <div className="space-y-3 mb-8">
                   {tier.features.map((feature) => (
                     <div
@@ -840,29 +776,15 @@ function PricingSection() {
                           <Check className="w-3 h-3 text-gold" />
                         </div>
                       ) : (
-                        <div
-                          className={`w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 ${
-                            tier.highlighted ? 'bg-white/5' : 'bg-charcoal/5'
-                          }`}
-                        >
-                          <X
-                            className={`w-3 h-3 ${
-                              tier.highlighted
-                                ? 'text-white/20'
-                                : 'text-charcoal/20'
-                            }`}
-                          />
+                        <div className="w-5 h-5 rounded-full bg-gray-100 flex items-center justify-center flex-shrink-0">
+                          <X className="w-3 h-3 text-gray-300" />
                         </div>
                       )}
                       <span
                         className={`text-sm ${
                           feature.included
-                            ? tier.highlighted
-                              ? 'text-white/80'
-                              : 'text-charcoal/80'
-                            : tier.highlighted
-                            ? 'text-white/30'
-                            : 'text-charcoal/30'
+                            ? 'text-charcoal-mid'
+                            : 'text-gray-300'
                         }`}
                       >
                         {feature.text}
@@ -871,13 +793,12 @@ function PricingSection() {
                   ))}
                 </div>
 
-                {/* CTA */}
                 <a
                   href={tier.ctaLink}
                   className={`block w-full text-center py-3 rounded-xl font-semibold text-sm transition-all duration-300 ${
                     tier.highlighted
-                      ? 'bg-gradient-to-r from-gold to-gold-light text-charcoal gold-glow-sm hover:brightness-110'
-                      : 'bg-gold/10 text-gold border border-gold/20 hover:bg-gold/20'
+                      ? 'bg-gradient-to-r from-gold to-gold-light text-white shadow-lg shadow-gold/20 hover:shadow-xl'
+                      : 'bg-gold/8 text-gold-dark border border-gold/15 hover:bg-gold/15'
                   }`}
                 >
                   {tier.cta}
@@ -891,24 +812,11 @@ function PricingSection() {
   )
 }
 
-// ──────────────────────────────────────────────
 // FINAL CTA SECTION
-// ──────────────────────────────────────────────
 function FinalCTASection() {
   return (
-    <section className="relative py-24 bg-[#0D0D0F] overflow-hidden">
-      <div className="absolute inset-0 bg-gold-mesh opacity-50" />
-      <motion.div
-        animate={{ backgroundPosition: ['0% 0%', '100% 100%', '0% 0%'] }}
-        transition={{ duration: 20, repeat: Infinity }}
-        className="absolute inset-0 opacity-20"
-        style={{
-          background:
-            'radial-gradient(ellipse 80% 60% at 50% 50%, rgba(201, 161, 74, 0.15), transparent)',
-          backgroundSize: '200% 200%',
-        }}
-      />
-      <div className="absolute inset-0 grain opacity-30" />
+    <section className="py-24 bg-white relative overflow-hidden">
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gold/5 rounded-full blur-[120px]" />
 
       <div className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <motion.div
@@ -917,33 +825,33 @@ function FinalCTASection() {
           viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 0.7 }}
         >
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gold/10 border border-gold/20 mb-6">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gold/8 border border-gold/15 mb-6">
             <Sparkles className="w-3.5 h-3.5 text-gold" />
-            <span className="text-xs font-medium text-gold tracking-wide uppercase">
+            <span className="text-xs font-medium text-gold-dark tracking-wide uppercase">
               Get Started Today
             </span>
           </div>
 
-          <h2 className="font-['Instrument_Serif'] text-3xl sm:text-4xl lg:text-5xl text-white mb-4 leading-tight">
+          <h2 className="font-['Instrument_Serif'] text-3xl sm:text-4xl lg:text-5xl text-charcoal mb-4 leading-tight">
             Ready to transform
             <br />
             <span className="text-gradient-gold">your venue?</span>
           </h2>
 
-          <p className="text-lg text-white/60 mb-8 max-w-lg mx-auto">
+          <p className="text-lg text-text-muted mb-8 max-w-lg mx-auto">
             Join 340+ premium venues already using TopSpots to manage bookings,
             delight customers, and grow revenue.
           </p>
 
           <a
             href="https://topspots.global/apply"
-            className="inline-flex items-center justify-center gap-2 px-10 py-4 rounded-xl bg-gradient-to-r from-gold to-gold-light text-charcoal font-semibold text-base gold-glow hover:brightness-110 transition-all duration-300"
+            className="inline-flex items-center justify-center gap-2 px-10 py-4 rounded-xl bg-gradient-to-r from-gold to-gold-light text-white font-semibold text-base shadow-lg shadow-gold/20 hover:shadow-xl hover:scale-[1.02] transition-all duration-300"
           >
             Start Your Free Trial
             <ArrowRight className="w-4 h-4" />
           </a>
 
-          <p className="text-sm text-white/40 mt-6">
+          <p className="text-sm text-text-muted mt-6">
             30-day free trial &middot; No credit card required &middot; Cancel
             anytime
           </p>
@@ -953,12 +861,10 @@ function FinalCTASection() {
   )
 }
 
-// ──────────────────────────────────────────────
 // MAIN PAGE
-// ──────────────────────────────────────────────
 export default function VenueDesignA() {
   return (
-    <div className="min-h-screen bg-charcoal">
+    <div className="min-h-screen bg-white">
       <Navbar />
       <HeroSection />
       <PainPointsSection />

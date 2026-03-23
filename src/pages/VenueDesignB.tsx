@@ -224,8 +224,8 @@ const stats = [
     suffix: '%',
     prefix: '+',
     icon: TrendingUp,
-    color: 'text-emerald-400',
-    bg: 'bg-emerald-400/10',
+    color: 'text-emerald-600',
+    bg: 'bg-emerald-50',
   },
   {
     label: 'Time Saved Weekly',
@@ -233,8 +233,8 @@ const stats = [
     suffix: ' hrs',
     prefix: '',
     icon: Clock,
-    color: 'text-blue-400',
-    bg: 'bg-blue-400/10',
+    color: 'text-blue-600',
+    bg: 'bg-blue-50',
   },
   {
     label: 'Bookings Increase',
@@ -242,8 +242,8 @@ const stats = [
     suffix: '%',
     prefix: '+',
     icon: ArrowUpRight,
-    color: 'text-amber-400',
-    bg: 'bg-amber-400/10',
+    color: 'text-gold-dark',
+    bg: 'bg-amber-50',
   },
   {
     label: 'Customer Retention',
@@ -251,22 +251,18 @@ const stats = [
     suffix: '%',
     prefix: '+',
     icon: Shield,
-    color: 'text-purple-400',
-    bg: 'bg-purple-400/10',
+    color: 'text-purple-600',
+    bg: 'bg-purple-50',
   },
 ]
 
 export default function VenueDesignB() {
   return (
-    <div className="min-h-screen bg-[#0D0D0F]">
+    <div className="min-h-screen bg-white">
       <Navbar />
 
-      {/* ===================== HERO ===================== */}
-      <section className="relative overflow-hidden">
-        {/* Background layers */}
-        <div className="absolute inset-0 bg-gold-mesh opacity-30" />
-        <div className="absolute inset-0 dot-pattern opacity-20" />
-        <div className="absolute inset-0 grain opacity-40" />
+      {/* HERO */}
+      <section className="relative overflow-hidden bg-[#FDFCFA]">
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-gold/5 rounded-full blur-[120px]" />
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28 lg:py-32">
@@ -278,15 +274,15 @@ export default function VenueDesignB() {
               animate="visible"
             >
               <motion.div variants={itemVariants}>
-                <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gold/10 border border-gold/20 text-gold text-sm font-medium mb-6">
-                  <Zap className="w-4 h-4" />
+                <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gold/8 border border-gold/15 text-gold-dark text-sm font-medium mb-6">
+                  <Zap className="w-4 h-4 text-gold" />
                   340+ venues already growing
                 </span>
               </motion.div>
 
               <motion.h1
                 variants={itemVariants}
-                className="font-['Instrument_Serif'] text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white leading-[1.1] mb-6"
+                className="font-['Instrument_Serif'] text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-charcoal leading-[1.1] mb-6"
               >
                 Stop losing revenue to{' '}
                 <span className="text-gradient-gold">chaos</span>
@@ -294,7 +290,7 @@ export default function VenueDesignB() {
 
               <motion.p
                 variants={itemVariants}
-                className="text-lg md:text-xl text-white/60 leading-relaxed mb-8 max-w-lg"
+                className="text-lg md:text-xl text-text-muted leading-relaxed mb-8 max-w-lg"
               >
                 Your competitors are already using smart venue management.
                 Every day without TopSpots is revenue lost.
@@ -306,14 +302,14 @@ export default function VenueDesignB() {
               >
                 <a
                   href="https://topspots.global/apply"
-                  className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-gold to-gold-light text-charcoal font-bold rounded-full shadow-lg shadow-gold/30 hover:shadow-gold/50 transition-all duration-200 hover:scale-105 active:scale-95 text-base"
+                  className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-gold to-gold-light text-white font-bold rounded-full shadow-lg shadow-gold/20 hover:shadow-xl transition-all duration-200 hover:scale-105 active:scale-95 text-base"
                 >
                   Start Free Trial
                   <ArrowUpRight className="w-5 h-5" />
                 </a>
                 <a
                   href="#features"
-                  className="inline-flex items-center justify-center gap-2 px-8 py-4 glass-card border border-white/10 text-white font-semibold rounded-full hover:border-gold/30 hover:text-gold transition-all duration-200 text-base"
+                  className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white border border-gray-200 text-charcoal font-semibold rounded-full hover:border-gold/30 hover:shadow-md transition-all duration-200 text-base"
                 >
                   See the Difference
                 </a>
@@ -321,7 +317,7 @@ export default function VenueDesignB() {
 
               <motion.p
                 variants={itemVariants}
-                className="text-sm text-white/40"
+                className="text-sm text-text-muted"
               >
                 30-day free trial &middot; No credit card &middot; Cancel
                 anytime
@@ -335,14 +331,14 @@ export default function VenueDesignB() {
               transition={{ duration: 0.8, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
               className="relative"
             >
-              <div className="relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
+              <div className="relative rounded-2xl overflow-hidden border border-gray-200 shadow-xl bg-white">
                 <div className="grid grid-cols-2 min-h-[380px] md:min-h-[420px]">
                   {/* Without TopSpots */}
-                  <div className="bg-gradient-to-br from-[#1a0a0a] to-[#0D0D0F] p-6 md:p-8 flex flex-col justify-between border-r border-white/5">
+                  <div className="bg-gradient-to-br from-red-50 to-white p-6 md:p-8 flex flex-col justify-between border-r border-gray-100">
                     <div>
                       <div className="flex items-center gap-2 mb-6">
                         <AlertTriangle className="w-5 h-5 text-red-400" />
-                        <span className="text-red-400 text-sm font-semibold uppercase tracking-wider">
+                        <span className="text-red-500 text-sm font-semibold uppercase tracking-wider">
                           Without TopSpots
                         </span>
                       </div>
@@ -356,27 +352,27 @@ export default function VenueDesignB() {
                         ].map((item) => (
                           <li
                             key={item}
-                            className="flex items-center gap-3 text-sm text-white/50"
+                            className="flex items-center gap-3 text-sm text-charcoal-mid/60"
                           >
-                            <X className="w-4 h-4 text-red-400/70 shrink-0" />
+                            <X className="w-4 h-4 text-red-400 shrink-0" />
                             {item}
                           </li>
                         ))}
                       </ul>
                     </div>
-                    <div className="mt-6 pt-4 border-t border-red-400/10">
-                      <p className="text-red-400/60 text-xs font-medium">
+                    <div className="mt-6 pt-4 border-t border-red-100">
+                      <p className="text-red-400 text-xs font-medium">
                         Avg. revenue loss: -18%/year
                       </p>
                     </div>
                   </div>
 
                   {/* With TopSpots */}
-                  <div className="bg-gradient-to-br from-[#0f1a0a] to-[#0D0D0F] p-6 md:p-8 flex flex-col justify-between">
+                  <div className="bg-gradient-to-br from-emerald-50 to-white p-6 md:p-8 flex flex-col justify-between">
                     <div>
                       <div className="flex items-center gap-2 mb-6">
-                        <Check className="w-5 h-5 text-emerald-400" />
-                        <span className="text-emerald-400 text-sm font-semibold uppercase tracking-wider">
+                        <Check className="w-5 h-5 text-emerald-500" />
+                        <span className="text-emerald-600 text-sm font-semibold uppercase tracking-wider">
                           With TopSpots
                         </span>
                       </div>
@@ -390,16 +386,16 @@ export default function VenueDesignB() {
                         ].map((item) => (
                           <li
                             key={item}
-                            className="flex items-center gap-3 text-sm text-white/80"
+                            className="flex items-center gap-3 text-sm text-charcoal-mid"
                           >
-                            <Check className="w-4 h-4 text-emerald-400/70 shrink-0" />
+                            <Check className="w-4 h-4 text-emerald-500 shrink-0" />
                             {item}
                           </li>
                         ))}
                       </ul>
                     </div>
-                    <div className="mt-6 pt-4 border-t border-emerald-400/10">
-                      <p className="text-emerald-400/80 text-xs font-medium">
+                    <div className="mt-6 pt-4 border-t border-emerald-100">
+                      <p className="text-emerald-600 text-xs font-medium">
                         Avg. revenue gain: +23%/year
                       </p>
                     </div>
@@ -407,32 +403,26 @@ export default function VenueDesignB() {
                 </div>
 
                 {/* Divider glow */}
-                <div className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-px bg-gradient-to-b from-red-400/20 via-white/10 to-emerald-400/20" />
+                <div className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-px bg-gradient-to-b from-red-200 via-gray-200 to-emerald-200" />
               </div>
-
-              {/* Floating glow behind card */}
-              <div className="absolute -inset-4 bg-gold/5 rounded-3xl blur-3xl -z-10" />
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* ===================== REVENUE COUNTER ===================== */}
-      <section className="relative py-20 md:py-28 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0D0D0F] via-[#111113] to-[#0D0D0F]" />
-        <div className="absolute inset-0 dot-pattern opacity-10" />
-
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      {/* REVENUE COUNTER */}
+      <section className="py-20 md:py-28 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.6 }}
           >
-            <p className="text-white/40 text-sm font-semibold uppercase tracking-widest mb-4">
+            <p className="text-text-muted text-sm font-semibold uppercase tracking-widest mb-4">
               Revenue generated for our venues
             </p>
-            <h2 className="font-['Instrument_Serif'] text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-white mb-4">
+            <h2 className="font-['Instrument_Serif'] text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-charcoal mb-4">
               <span className="text-gradient-gold">
                 <AnimatedCounter
                   target={250000}
@@ -441,8 +431,8 @@ export default function VenueDesignB() {
                 />
               </span>
             </h2>
-            <p className="text-white/50 text-lg mb-2">PLN</p>
-            <p className="text-white/30 text-sm">
+            <p className="text-text-muted text-lg mb-2">PLN</p>
+            <p className="text-text-muted/60 text-sm">
               and counting...
             </p>
           </motion.div>
@@ -459,7 +449,7 @@ export default function VenueDesignB() {
               <motion.div
                 key={stat.label}
                 variants={itemVariants}
-                className="glass-card rounded-2xl p-6 md:p-8 border border-white/5 hover:border-white/10 transition-colors duration-300"
+                className="bg-white rounded-2xl p-6 md:p-8 border border-gray-100 hover:border-gold/20 hover:shadow-md transition-all duration-300"
               >
                 <div
                   className={`inline-flex items-center justify-center w-12 h-12 rounded-xl ${stat.bg} mb-4`}
@@ -474,18 +464,16 @@ export default function VenueDesignB() {
                     suffix={stat.suffix}
                   />
                 </p>
-                <p className="text-white/50 text-sm">{stat.label}</p>
+                <p className="text-text-muted text-sm">{stat.label}</p>
               </motion.div>
             ))}
           </motion.div>
         </div>
       </section>
 
-      {/* ===================== FEATURES SHOWCASE ===================== */}
-      <section id="features" className="relative py-20 md:py-28 overflow-hidden">
-        <div className="absolute inset-0 grain opacity-30" />
-
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* FEATURES SHOWCASE */}
+      <section id="features" className="py-20 md:py-28 bg-[#F8F9FB]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -493,14 +481,14 @@ export default function VenueDesignB() {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <p className="text-gold text-sm font-semibold uppercase tracking-widest mb-4">
+            <p className="text-gold-dark text-sm font-semibold uppercase tracking-widest mb-4">
               Features
             </p>
-            <h2 className="font-['Instrument_Serif'] text-3xl sm:text-4xl md:text-5xl text-white mb-4">
+            <h2 className="font-['Instrument_Serif'] text-3xl sm:text-4xl md:text-5xl text-charcoal mb-4">
               Built for venues that want to{' '}
               <span className="text-gradient-gold">win</span>
             </h2>
-            <p className="text-white/50 text-lg max-w-2xl mx-auto">
+            <p className="text-text-muted text-lg max-w-2xl mx-auto">
               Every tool you need to outperform the competition, in one platform.
             </p>
           </motion.div>
@@ -517,28 +505,28 @@ export default function VenueDesignB() {
               <motion.div
                 key={feature.title}
                 variants={itemVariants}
-                className={`${feature.span} glass-card-gold rounded-2xl p-6 md:p-8 border border-gold/10 hover:border-gold/25 transition-all duration-300 group cursor-default`}
+                className={`${feature.span} bg-white rounded-2xl p-6 md:p-8 border border-gray-100 hover:border-gold/20 hover:shadow-lg transition-all duration-300 group cursor-default`}
               >
                 <div className="flex items-start justify-between mb-4">
-                  <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gold/10 group-hover:bg-gold/15 transition-colors duration-300">
+                  <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gold/8 group-hover:bg-gold/12 transition-colors duration-300">
                     <feature.icon className="w-6 h-6 text-gold" />
                   </div>
                   <span
                     className={`px-3 py-1 rounded-full text-[10px] font-semibold uppercase tracking-widest ${
                       feature.tag === 'Core'
-                        ? 'bg-blue-400/10 text-blue-400'
+                        ? 'bg-blue-50 text-blue-600'
                         : feature.tag === 'Growth'
-                        ? 'bg-emerald-400/10 text-emerald-400'
-                        : 'bg-amber-400/10 text-amber-400'
+                        ? 'bg-emerald-50 text-emerald-600'
+                        : 'bg-amber-50 text-amber-600'
                     }`}
                   >
                     {feature.tag}
                   </span>
                 </div>
-                <h3 className="font-['Instrument_Serif'] text-xl md:text-2xl text-white mb-3 group-hover:text-gold transition-colors duration-300">
+                <h3 className="font-['Instrument_Serif'] text-xl md:text-2xl text-charcoal mb-3 group-hover:text-gold-dark transition-colors duration-300">
                   {feature.title}
                 </h3>
-                <p className="text-white/50 text-sm leading-relaxed">
+                <p className="text-text-muted text-sm leading-relaxed">
                   {feature.description}
                 </p>
               </motion.div>
@@ -547,8 +535,8 @@ export default function VenueDesignB() {
         </div>
       </section>
 
-      {/* ===================== COMPETITOR COMPARISON ===================== */}
-      <section className="relative py-20 md:py-28 bg-[#FDFCFA] overflow-hidden">
+      {/* COMPETITOR COMPARISON */}
+      <section className="py-20 md:py-28 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -557,14 +545,14 @@ export default function VenueDesignB() {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <p className="text-[#A8843A] text-sm font-semibold uppercase tracking-widest mb-4">
+            <p className="text-gold-dark text-sm font-semibold uppercase tracking-widest mb-4">
               Comparison
             </p>
-            <h2 className="font-['Instrument_Serif'] text-3xl sm:text-4xl md:text-5xl text-[#0D0D0F] mb-4">
+            <h2 className="font-['Instrument_Serif'] text-3xl sm:text-4xl md:text-5xl text-charcoal mb-4">
               See how TopSpots{' '}
-              <span className="text-[#C9A14A]">compares</span>
+              <span className="text-gradient-gold">compares</span>
             </h2>
-            <p className="text-[#1C1E21]/50 text-lg max-w-2xl mx-auto">
+            <p className="text-text-muted text-lg max-w-2xl mx-auto">
               The all-in-one platform that replaces scattered tools and
               guesswork.
             </p>
@@ -580,7 +568,7 @@ export default function VenueDesignB() {
             <table className="w-full min-w-[600px]">
               <thead>
                 <tr>
-                  <th className="text-left py-4 px-4 md:px-6 text-sm font-semibold text-[#1C1E21]/60 uppercase tracking-wider">
+                  <th className="text-left py-4 px-4 md:px-6 text-sm font-semibold text-text-muted uppercase tracking-wider">
                     Feature
                   </th>
                   {Object.keys(comparisonData).map((col) => (
@@ -588,8 +576,8 @@ export default function VenueDesignB() {
                       key={col}
                       className={`py-4 px-4 md:px-6 text-center text-sm font-semibold uppercase tracking-wider ${
                         col === 'TopSpots'
-                          ? 'text-[#C9A14A] border-x-2 border-t-2 border-[#C9A14A]/30 bg-[#C9A14A]/5 rounded-t-xl'
-                          : 'text-[#1C1E21]/60'
+                          ? 'text-gold-dark border-x-2 border-t-2 border-gold/20 bg-gold/5 rounded-t-xl'
+                          : 'text-text-muted'
                       }`}
                     >
                       {col}
@@ -602,10 +590,10 @@ export default function VenueDesignB() {
                   <tr
                     key={feature}
                     className={
-                      i % 2 === 0 ? 'bg-[#F5F3EF]/50' : 'bg-transparent'
+                      i % 2 === 0 ? 'bg-[#F8F9FB]' : 'bg-transparent'
                     }
                   >
-                    <td className="py-4 px-4 md:px-6 text-sm font-medium text-[#1C1E21]/80">
+                    <td className="py-4 px-4 md:px-6 text-sm font-medium text-charcoal-mid">
                       {feature}
                     </td>
                     {Object.entries(comparisonData).map(([col, values]) => (
@@ -613,24 +601,24 @@ export default function VenueDesignB() {
                         key={`${feature}-${col}`}
                         className={`py-4 px-4 md:px-6 text-center ${
                           col === 'TopSpots'
-                            ? 'border-x-2 border-[#C9A14A]/30 bg-[#C9A14A]/5'
+                            ? 'border-x-2 border-gold/20 bg-gold/5'
                             : ''
                         } ${
                           i === comparisonFeatures.length - 1 && col === 'TopSpots'
-                            ? 'border-b-2 border-[#C9A14A]/30 rounded-b-xl'
+                            ? 'border-b-2 border-gold/20 rounded-b-xl'
                             : ''
                         }`}
                       >
                         {values[i] === 'yes' ? (
-                          <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-emerald-100 text-emerald-600">
+                          <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-emerald-50 text-emerald-600">
                             <Check className="w-4 h-4" />
                           </span>
                         ) : values[i] === 'partial' ? (
-                          <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-amber-100 text-amber-600 text-xs font-bold">
+                          <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-amber-50 text-amber-600 text-xs font-bold">
                             ~
                           </span>
                         ) : (
-                          <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-red-100 text-red-500">
+                          <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-red-50 text-red-400">
                             <X className="w-4 h-4" />
                           </span>
                         )}
@@ -644,15 +632,9 @@ export default function VenueDesignB() {
         </div>
       </section>
 
-      {/* ===================== PRICING ===================== */}
-      <section
-        id="pricing"
-        className="relative py-20 md:py-28 overflow-hidden"
-      >
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0D0D0F] via-[#111113] to-[#0D0D0F]" />
-        <div className="absolute inset-0 grain opacity-30" />
-
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* PRICING */}
+      <section id="pricing" className="py-20 md:py-28 bg-[#F8F9FB]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -660,14 +642,14 @@ export default function VenueDesignB() {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <p className="text-gold text-sm font-semibold uppercase tracking-widest mb-4">
+            <p className="text-gold-dark text-sm font-semibold uppercase tracking-widest mb-4">
               Pricing
             </p>
-            <h2 className="font-['Instrument_Serif'] text-3xl sm:text-4xl md:text-5xl text-white mb-4">
+            <h2 className="font-['Instrument_Serif'] text-3xl sm:text-4xl md:text-5xl text-charcoal mb-4">
               Invest in your{' '}
               <span className="text-gradient-gold">growth</span>
             </h2>
-            <p className="text-white/50 text-lg max-w-2xl mx-auto">
+            <p className="text-text-muted text-lg max-w-2xl mx-auto">
               Choose the plan that matches your ambition. All plans include a
               30-day free trial.
             </p>
@@ -684,32 +666,32 @@ export default function VenueDesignB() {
               <motion.div
                 key={plan.name}
                 variants={itemVariants}
-                className={`relative glass-card rounded-2xl p-6 md:p-8 border transition-all duration-300 ${
+                className={`relative bg-white rounded-2xl p-6 md:p-8 border transition-all duration-300 ${
                   plan.highlighted
-                    ? 'border-gold/40 shadow-lg shadow-gold/10'
-                    : 'border-white/10 hover:border-white/20'
+                    ? 'border-gold/30 shadow-xl'
+                    : 'border-gray-100 hover:border-gold/20 hover:shadow-lg'
                 }`}
               >
                 {plan.highlighted && plan.badge && (
                   <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
-                    <span className="px-4 py-1.5 bg-gradient-to-r from-gold to-gold-light text-charcoal text-xs font-bold rounded-full uppercase tracking-wider shadow-lg shadow-gold/30">
+                    <span className="px-4 py-1.5 bg-gradient-to-r from-gold to-gold-light text-white text-xs font-bold rounded-full uppercase tracking-wider shadow-md">
                       {plan.badge}
                     </span>
                   </div>
                 )}
 
                 <div className="mb-6">
-                  <h3 className="font-['Instrument_Serif'] text-2xl text-white mb-2">
+                  <h3 className="font-['Instrument_Serif'] text-2xl text-charcoal mb-2">
                     {plan.name}
                   </h3>
-                  <p className="text-white/40 text-sm mb-4">
+                  <p className="text-text-muted text-sm mb-4">
                     {plan.description}
                   </p>
                   <div className="flex items-baseline gap-1">
-                    <span className="text-4xl md:text-5xl font-bold text-white">
+                    <span className="text-4xl md:text-5xl font-bold text-charcoal">
                       {plan.price}
                     </span>
-                    <span className="text-white/40 text-sm">
+                    <span className="text-text-muted text-sm">
                       PLN{plan.period}
                     </span>
                   </div>
@@ -722,13 +704,13 @@ export default function VenueDesignB() {
                       className="flex items-center gap-3 text-sm"
                     >
                       {f.included ? (
-                        <Check className="w-4 h-4 text-emerald-400 shrink-0" />
+                        <Check className="w-4 h-4 text-emerald-500 shrink-0" />
                       ) : (
-                        <X className="w-4 h-4 text-white/20 shrink-0" />
+                        <X className="w-4 h-4 text-gray-300 shrink-0" />
                       )}
                       <span
                         className={
-                          f.included ? 'text-white/70' : 'text-white/30'
+                          f.included ? 'text-charcoal-mid' : 'text-gray-300'
                         }
                       >
                         {f.name}
@@ -741,8 +723,8 @@ export default function VenueDesignB() {
                   href={plan.href}
                   className={`block w-full text-center py-3.5 rounded-full font-semibold text-sm transition-all duration-200 hover:scale-105 active:scale-95 ${
                     plan.highlighted
-                      ? 'bg-gradient-to-r from-gold to-gold-light text-charcoal shadow-lg shadow-gold/30 hover:shadow-gold/50'
-                      : 'border border-white/20 text-white hover:border-gold/40 hover:text-gold'
+                      ? 'bg-gradient-to-r from-gold to-gold-light text-white shadow-lg shadow-gold/20 hover:shadow-xl'
+                      : 'border border-gray-200 text-charcoal-mid hover:border-gold/30 hover:text-gold-dark'
                   }`}
                 >
                   {plan.cta}
@@ -753,11 +735,9 @@ export default function VenueDesignB() {
         </div>
       </section>
 
-      {/* ===================== FINAL CTA ===================== */}
-      <section className="relative py-20 md:py-28 overflow-hidden">
-        <div className="absolute inset-0 bg-gold-mesh opacity-20" />
-        <div className="absolute inset-0 grain opacity-40" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gold/8 rounded-full blur-[100px]" />
+      {/* FINAL CTA */}
+      <section className="py-20 md:py-28 bg-white relative overflow-hidden">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gold/5 rounded-full blur-[100px]" />
 
         <div className="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
@@ -766,25 +746,25 @@ export default function VenueDesignB() {
             viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="font-['Instrument_Serif'] text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white leading-tight mb-6">
+            <h2 className="font-['Instrument_Serif'] text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-charcoal leading-tight mb-6">
               Your competitors won't wait.{' '}
               <span className="text-gradient-gold">
                 Neither should you.
               </span>
             </h2>
-            <p className="text-white/50 text-lg md:text-xl mb-10">
+            <p className="text-text-muted text-lg md:text-xl mb-10">
               340+ venues are already ahead.
             </p>
 
             <a
               href="https://topspots.global/apply"
-              className="inline-flex items-center justify-center gap-2 px-10 py-5 bg-gradient-to-r from-gold to-gold-light text-charcoal font-bold rounded-full shadow-xl shadow-gold/30 hover:shadow-gold/50 transition-all duration-200 hover:scale-105 active:scale-95 text-lg gold-glow"
+              className="inline-flex items-center justify-center gap-2 px-10 py-5 bg-gradient-to-r from-gold to-gold-light text-white font-bold rounded-full shadow-lg shadow-gold/20 hover:shadow-xl transition-all duration-200 hover:scale-105 active:scale-95 text-lg"
             >
               Start Your Free Trial Now
               <ArrowUpRight className="w-5 h-5" />
             </a>
 
-            <p className="text-white/40 text-sm mt-6">
+            <p className="text-text-muted text-sm mt-6">
               30-day free trial &middot; No credit card &middot; Cancel anytime
             </p>
           </motion.div>
